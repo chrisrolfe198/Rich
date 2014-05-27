@@ -36,6 +36,7 @@ Rich = (function() {
       item = _ref[_i];
       this.initiate(item);
     }
+    this.addListeners();
   }
 
   Rich.prototype.initiate = function(item) {
@@ -49,6 +50,25 @@ Rich = (function() {
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
     return item.appendChild(div);
+  };
+
+  Rich.prototype.addListeners = function() {
+    var item, toolbarItems, _i, _len, _results;
+    toolbarItems = document.querySelectorAll('.rich-toolbar-item');
+    _results = [];
+    for (_i = 0, _len = toolbarItems.length; _i < _len; _i++) {
+      item = toolbarItems[_i];
+      _results.push(item.addEventListener('click', function(e) {
+        var toolbarItem;
+        toolbarItem = e.currentTarget;
+        toolbarItem.parentNode.nextSibling.focus();
+        switch (toolbarItem.classList[0]) {
+          case "u":
+            return document.execCommand('underline', false, null);
+        }
+      }));
+    }
+    return _results;
   };
 
   return Rich;
