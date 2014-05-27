@@ -39,7 +39,16 @@ Rich = (function() {
   }
 
   Rich.prototype.initiate = function(item) {
-    return item.appendChild(this.toolbar);
+    item.appendChild(this.toolbar);
+    return this.createContentEditableArea(item);
+  };
+
+  Rich.prototype.createContentEditableArea = function(item) {
+    var div;
+    div = document.createElement("div");
+    div.setAttribute('contenteditable', 'true');
+    div.classList.add('rich-textarea');
+    return item.appendChild(div);
   };
 
   return Rich;
