@@ -15,14 +15,15 @@ class Rich
 		div = document.createElement("div")
 		div.setAttribute('contenteditable', 'true')
 		div.classList.add('rich-textarea')
+		div.innerHTML = 'asdf'
 		item.appendChild(div)
 	
 	addListeners: () ->
 		toolbarItems = document.querySelectorAll('.rich-toolbar-item')
 		for item in toolbarItems
-			item.addEventListener('click', (e) ->
+			item.addEventListener('mousedown', (e) ->
+				e.preventDefault()
 				toolbarItem = e.currentTarget
-				toolbarItem.parentNode.nextSibling.focus()
 				switch toolbarItem.classList[0]
 					when "u" then document.execCommand('underline', false, null)
 			)

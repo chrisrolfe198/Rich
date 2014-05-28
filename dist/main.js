@@ -49,6 +49,7 @@ Rich = (function() {
     div = document.createElement("div");
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
+    div.innerHTML = 'asdf';
     return item.appendChild(div);
   };
 
@@ -58,10 +59,10 @@ Rich = (function() {
     _results = [];
     for (_i = 0, _len = toolbarItems.length; _i < _len; _i++) {
       item = toolbarItems[_i];
-      _results.push(item.addEventListener('click', function(e) {
+      _results.push(item.addEventListener('mousedown', function(e) {
         var toolbarItem;
+        e.preventDefault();
         toolbarItem = e.currentTarget;
-        toolbarItem.parentNode.nextSibling.focus();
         switch (toolbarItem.classList[0]) {
           case "u":
             return document.execCommand('underline', false, null);
