@@ -63,9 +63,12 @@ Rich = (function() {
         var toolbarItem;
         e.preventDefault();
         toolbarItem = e.currentTarget;
-        switch (toolbarItem.classList[0]) {
-          case "u":
-            return document.execCommand('underline', false, null);
+        if (item = ToolbarItems[toolbarItem.classList[0]]) {
+          if (typeof item === "string") {
+            return document.execCommand(item);
+          } else {
+            return document.execCommand(item.command, false, item.value);
+          }
         }
       }));
     }

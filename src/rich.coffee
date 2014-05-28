@@ -24,8 +24,11 @@ class Rich
 			item.addEventListener('mousedown', (e) ->
 				e.preventDefault()
 				toolbarItem = e.currentTarget
-				switch toolbarItem.classList[0]
-					when "u" then document.execCommand('underline', false, null)
+				if item = ToolbarItems[toolbarItem.classList[0]]
+					if typeof item == "string"
+						document.execCommand(item)
+					else
+						document.execCommand(item.command, false, item.value)
 			)
 
 new Rich()
