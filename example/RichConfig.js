@@ -1,3 +1,3 @@
 var RichConfig = {
-	toolbar: "b,i,u,:-)"
+	toolbar: "b,i,u,smiley"
 }

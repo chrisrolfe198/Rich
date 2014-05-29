@@ -40,8 +40,9 @@ Rich = (function() {
   }
 
   Rich.prototype.initiate = function(item) {
-    item.appendChild(this.toolbar);
-    return this.createContentEditableArea(item);
+    this.createContentEditableArea(item);
+    item.insertAdjacentHTML('afterEnd', this.toolbar.outerHTML);
+    return item.style.display = 'none';
   };
 
   Rich.prototype.createContentEditableArea = function(item) {
@@ -49,8 +50,8 @@ Rich = (function() {
     div = document.createElement("div");
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
-    div.innerHTML = 'asdf';
-    return item.appendChild(div);
+    div.innerHTML = item.innerHTML + 'example';
+    return item.insertAdjacentHTML('afterEnd', div.outerHTML);
   };
 
   Rich.prototype.addListeners = function() {

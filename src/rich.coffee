@@ -7,16 +7,18 @@ class Rich
 
 	initiate: (item) ->
 		# Add the toolbar
-		item.appendChild(@toolbar)
 		@createContentEditableArea(item)
+		item.insertAdjacentHTML('afterEnd', @toolbar.outerHTML)
+		item.style.display = 'none'
+		
 		# Replace any form fields with a content editable div and update the form? On submit?
 
 	createContentEditableArea: (item) ->
 		div = document.createElement("div")
 		div.setAttribute('contenteditable', 'true')
 		div.classList.add('rich-textarea')
-		div.innerHTML = 'asdf'
-		item.appendChild(div)
+		div.innerHTML = item.innerHTML + 'example'
+		item.insertAdjacentHTML('afterEnd', div.outerHTML)
 	
 	addListeners: () ->
 		toolbarItems = document.querySelectorAll('.rich-toolbar-item')
