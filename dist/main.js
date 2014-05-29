@@ -51,6 +51,10 @@ Rich = (function() {
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
     div.innerHTML = item.innerHTML + 'example';
+    div.addEventListener("click", function() {
+      return console.log('foobar');
+    });
+    console.log(div);
     return item.insertAdjacentHTML('afterEnd', div.outerHTML);
   };
 
@@ -74,6 +78,10 @@ Rich = (function() {
       }));
     }
     return _results;
+  };
+
+  Rich.prototype.testListener = function() {
+    return console.log(this);
   };
 
   return Rich;

@@ -10,7 +10,6 @@ class Rich
 		@createContentEditableArea(item)
 		item.insertAdjacentHTML('afterEnd', @toolbar.outerHTML)
 		item.style.display = 'none'
-		
 		# Replace any form fields with a content editable div and update the form? On submit?
 
 	createContentEditableArea: (item) ->
@@ -18,6 +17,10 @@ class Rich
 		div.setAttribute('contenteditable', 'true')
 		div.classList.add('rich-textarea')
 		div.innerHTML = item.innerHTML + 'example'
+		div.addEventListener("click", () ->
+			console.log('foobar')
+		)
+		console.log(div)
 		item.insertAdjacentHTML('afterEnd', div.outerHTML)
 	
 	addListeners: () ->
@@ -32,5 +35,8 @@ class Rich
 					else
 						document.execCommand(item.command, false, item.value)
 			)
+	
+	testListener: () ->
+		console.log(@)
 
 new Rich()
