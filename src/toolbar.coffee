@@ -8,7 +8,7 @@ class RichToolbar
 	build: () ->
 		toolbarArray = @config.split(/,/)
 		toolbarContainer = document.createElement("div")
-		toolbarContainer.classList.add("toolbar")
+		toolbarContainer.classList.add("rich-toolbar")
 		# Create an HTML structure from the array
 		for item in toolbarArray
 			itemHTML = document.createElement("div")

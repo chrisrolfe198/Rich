@@ -10,7 +10,7 @@ RichToolbar = (function() {
     var item, itemHTML, toolbarArray, toolbarContainer, _i, _len;
     toolbarArray = this.config.split(/,/);
     toolbarContainer = document.createElement("div");
-    toolbarContainer.classList.add("toolbar");
+    toolbarContainer.classList.add("rich-toolbar");
     for (_i = 0, _len = toolbarArray.length; _i < _len; _i++) {
       item = toolbarArray[_i];
       itemHTML = document.createElement("div");
@@ -42,7 +42,8 @@ Rich = (function() {
   Rich.prototype.initiate = function(item) {
     this.createContentEditableArea(item);
     item.insertAdjacentHTML('afterEnd', this.toolbar.outerHTML);
-    return item.style.display = 'none';
+    item.style.display = 'none';
+    return this.updateOriginalElement();
   };
 
   Rich.prototype.createContentEditableArea = function(item) {
@@ -51,10 +52,6 @@ Rich = (function() {
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
     div.innerHTML = item.innerHTML + 'example';
-    div.addEventListener("click", function() {
-      return console.log('foobar');
-    });
-    console.log(div);
     return item.insertAdjacentHTML('afterEnd', div.outerHTML);
   };
 
@@ -80,8 +77,23 @@ Rich = (function() {
     return _results;
   };
 
-  Rich.prototype.testListener = function() {
-    return console.log(this);
+  Rich.prototype.updateOriginalElement = function() {
+    document.querySelector('.rich-toolbar').addEventListener("mousedown", this.listenerToUpdateOriginalElement);
+    return document.querySelector('.rich-textarea').addEventListener("keyup", this.listenerToUpdateOriginalElement);
+  };
+
+  Rich.prototype.listenerToUpdateOriginalElement = function(e) {
+    var originalElement, richTextarea;
+    if (e.type === 'mousedown') {
+      richTextarea = e.currentTarget.parentNode.nextElementSibling;
+      originalElement = e.currentTarget.parentNode.previousElementSibling;
+    } else if (e.type === 'keyup') {
+      richTextarea = e.currentTarget;
+      originalElement = e.currentTarget.previousElementSibling.previousElementSibling;
+    }
+    if (richTextarea && originalElement) {
+      return originalElement.innerHTML = richTextarea.innerHTML;
+    }
   };
 
   return Rich;
