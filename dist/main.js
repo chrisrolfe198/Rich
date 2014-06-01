@@ -51,7 +51,7 @@ Rich = (function() {
     div = document.createElement("div");
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
-    div.innerHTML = item.innerHTML + 'example';
+    div.innerHTML = item.innerHTML;
     return item.insertAdjacentHTML('afterEnd', div.outerHTML);
   };
 
@@ -91,7 +91,7 @@ Rich = (function() {
       richTextarea = e.currentTarget;
       originalElement = e.currentTarget.previousElementSibling.previousElementSibling;
     }
-    if (richTextarea && originalElement) {
+    if (richTextarea && originalElement && originalElement.classList.contains('rich')) {
       return originalElement.innerHTML = richTextarea.innerHTML;
     }
   };

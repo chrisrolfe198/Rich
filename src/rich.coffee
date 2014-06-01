@@ -17,7 +17,7 @@ class Rich
 		div = document.createElement("div")
 		div.setAttribute('contenteditable', 'true')
 		div.classList.add('rich-textarea')
-		div.innerHTML = item.innerHTML + 'example'
+		div.innerHTML = item.innerHTML
 		item.insertAdjacentHTML('afterEnd', div.outerHTML)
 	
 	addListeners: () ->
@@ -45,7 +45,7 @@ class Rich
 			richTextarea = e.currentTarget
 			originalElement = e.currentTarget.previousElementSibling.previousElementSibling
 
-		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement
+		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement and originalElement.classList.contains('rich')
 
 
 
