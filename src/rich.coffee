@@ -1,4 +1,6 @@
 class Rich
+	native = ["backColor", "bold", "insertHorizontalRule","indent", "insertOrderedList", "insertUnorderedList", "italic", "justifyCenter", "justifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo", "removeFormat", "selectAll", "strikethrough", "subscript", "superscript", "underline", "undo", "unlink"],
+
 	constructor: () ->
 		@instances = document.querySelectorAll('.rich')
 		@toolbar = new RichToolbar
@@ -23,15 +25,12 @@ class Rich
 	addListeners: () ->
 		toolbarItems = document.querySelectorAll('.rich-toolbar-item')
 		for item in toolbarItems
-			item.addEventListener('mousedown', (e) ->
+			item.addEventListener('mousedown', ((e) ->
 				e.preventDefault()
 				toolbarItem = e.currentTarget
 				if item = ToolbarItems[toolbarItem.classList[0]]
-					if typeof item == "string"
-						document.execCommand(item)
-					else
-						document.execCommand(item.command, false, item.value)
-			)
+					@handleToolbarItemClick(item)
+			).bind(@))
 
 	updateOriginalElement: () ->
 		document.querySelector('.rich-toolbar').addEventListener("mousedown", @listenerToUpdateOriginalElement)
@@ -46,7 +45,18 @@ class Rich
 			originalElement = e.currentTarget.previousElementSibling.previousElementSibling
 
 		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement and originalElement.classList.contains('rich')
+	
+	handleToolbarItemClick: (item) ->
+		if @isNative(item)
+			console.log('native')
+		else
+			console.log('Fake!')
+	
+	isNative: (item) ->
+		return true if (typeof item == 'string')
+		return false
 
+	isRealNative: () ->
 
 
 new Rich()
