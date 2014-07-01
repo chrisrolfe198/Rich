@@ -1,11 +1,11 @@
 class Rich
-	native = ["backColor", "bold", "insertHorizontalRule","indent", "insertOrderedList", "insertUnorderedList", "italic", "justifyCenter", "justifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo", "removeFormat", "selectAll", "strikethrough", "subscript", "superscript", "underline", "undo", "unlink"],
-
 	constructor: () ->
 		@instances = document.querySelectorAll('.rich')
 		@toolbar = new RichToolbar
 		@initiate(item) for item in @instances
 		@addListeners()
+		@native = ["backColor", "bold", "insertHorizontalRule","indent", "insertOrderedList", "insertUnorderedList", "italic", "justifyCenter", "justifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo", "removeFormat", "selectAll", "strikethrough", "subscript", "superscript", "underline", "undo", "unlink"]
+
 
 	initiate: (item) ->
 		# Add the toolbar
@@ -48,15 +48,23 @@ class Rich
 	
 	handleToolbarItemClick: (item) ->
 		if @isNative(item)
-			console.log('native')
+			if @isRealNative(item)
+				document.execCommand(item)
+			else
+				promptText = prompt()
+				document.execCommand(item, false, promptText)
 		else
-			console.log('Fake!')
+			document.execCommand(item.command, false, item.value)
 	
 	isNative: (item) ->
 		return true if (typeof item == 'string')
 		return false
 
-	isRealNative: () ->
+	isRealNative: (item) ->
+		if item in @native
+			return true
+		else
+			return false
 
 
 new Rich()
