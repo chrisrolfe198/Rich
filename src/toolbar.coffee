@@ -13,6 +13,7 @@ class RichToolbar
 		for item in toolbarArray
 			itemHTML = document.createElement("div")
 			itemHTML.classList.add(item, "rich-toolbar-item")
+			itemHTML.innerHTML = item
 			toolbarContainer.appendChild(itemHTML)
 
 		return toolbarContainer
