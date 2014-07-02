@@ -40,34 +40,121 @@ Rich = (function() {
     }
     this.addListeners();
     this["native"] = {
-      "b": "bold",
-      "hr": "insertHorizontalRule",
-      "indent": "indent",
-      "ol": "insertOrderedList",
-      "ul": "insertUnorderedList",
-      "i": "italic",
-      "middel": "justifyCenter",
-      "full": "justifyFull",
-      "left": "justifyLeft",
-      "right": "justifyRight",
-      "outdent": "outdent",
-      "unformat": "removeFormat",
-      "all": "selectAll",
-      "s": "strikethrough",
-      "sub": "subscript",
-      "sup": "superscript",
-      "u": "underline"
+      "b": {
+        "command": "bold",
+        "type": "native"
+      },
+      "hr": {
+        "command": "insertHorizontalRule",
+        "type": "native"
+      },
+      "indent": {
+        "command": "indent",
+        "type": "native"
+      },
+      "ol": {
+        "command": "insertOrderedList",
+        "type": "native"
+      },
+      "ul": {
+        "command": "insertUnorderedList",
+        "type": "native"
+      },
+      "i": {
+        "command": "italic",
+        "type": "native"
+      },
+      "middel": {
+        "command": "justifyCenter",
+        "type": "native"
+      },
+      "full": {
+        "command": "justifyFull",
+        "type": "native"
+      },
+      "left": {
+        "command": "justifyLeft",
+        "type": "native"
+      },
+      "right": {
+        "command": "justifyRight",
+        "type": "native"
+      },
+      "outdent": {
+        "command": "outdent",
+        "type": "native"
+      },
+      "unformat": {
+        "command": "removeFormat",
+        "type": "native"
+      },
+      "all": {
+        "command": "selectAll",
+        "type": "native"
+      },
+      "s": {
+        "command": "strikethrough",
+        "type": "native"
+      },
+      "sub": {
+        "command": "subscript",
+        "type": "native"
+      },
+      "sup": {
+        "command": "superscript",
+        "type": "native"
+      },
+      "u": {
+        "command": "underline",
+        "type": "native"
+      }
     };
     this.fakeNative = {
-      "background": "backColor",
-      "a": "createLink",
-      "font": "fontName",
-      "fontSize": "fontSize",
-      "color": "foreColor",
-      "wrap": "formatBlock",
-      "html": "insertHTML",
-      "image": "insertImage",
-      "text": "insertText"
+      "background": {
+        "command": "backColor",
+        "type": "fakeNative",
+        "prompt": "Enter a background color"
+      },
+      "a": {
+        "command": "createLink",
+        "type": "fakeNative",
+        "prompt": "Enter the URL for the link (needs http://)"
+      },
+      "font": {
+        "command": "fontName",
+        "type": "fakeNative",
+        "prompt": "Enter a font name"
+      },
+      "fontSize": {
+        "command": "fontSize",
+        "type": "fakeNative",
+        "prompt": "Enter a font size (1-7)"
+      },
+      "color": {
+        "command": "foreColor",
+        "type": "fakeNative",
+        "prompt": "Enter a foreground color"
+      },
+      "wrap": {
+        "command": "formatBlock",
+        "type": "fakeNative",
+        "prompt": "Enter the html for format the block with"
+      },
+      "html": {
+        "command": "insertHTML",
+        "type": "fakeNative",
+        "prompt": "Enter HTML"
+      },
+      "image": {
+        "command": "insertImage",
+        "type": "fakeNative",
+        "prompt": "Enter an image URL"
+      },
+      "text": {
+        "command": "insertText",
+        "type": "fakeNative",
+        "prompt": "Enter text"
+      }
     };
   }
 
@@ -129,11 +216,13 @@ Rich = (function() {
   Rich.prototype.handleToolbarItemClick = function(item) {
     var promptText;
     if (this.isNative(item)) {
+      console.log('is native');
       if (this.isRealNative(item)) {
         return document.execCommand(this["native"][item]);
       } else {
-        promptText = prompt();
-        return document.execCommand(this.fakeNative[item], false, promptText);
+        promptText = prompt(this.fakeNative[item].prompt);
+        console.log(promptText);
+        return document.execCommand(this.fakeNative[item].command, false, promptText);
       }
     } else {
       return document.execCommand(item.command, false, item.value);
@@ -141,7 +230,7 @@ Rich = (function() {
   };
 
   Rich.prototype.isNative = function(item) {
-    if (typeof item === 'string') {
+    if (this["native"][item] || this.fakeNative[item]) {
       return true;
     }
     return false;
@@ -150,9 +239,8 @@ Rich = (function() {
   Rich.prototype.isRealNative = function(item) {
     if (__indexOf.call(this["native"], item) >= 0) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 
   return Rich;
