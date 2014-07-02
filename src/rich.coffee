@@ -4,8 +4,36 @@ class Rich
 		@toolbar = new RichToolbar
 		@initiate(item) for item in @instances
 		@addListeners()
-		@native = ["backColor", "bold", "insertHorizontalRule","indent", "insertOrderedList", "insertUnorderedList", "italic", "justifyCenter", "justifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo", "removeFormat", "selectAll", "strikethrough", "subscript", "superscript", "underline", "undo", "unlink"]
-
+		@native = {
+			"b"			: "bold",
+			"hr"		: "insertHorizontalRule",
+			"indent"	: "indent",
+			"ol"		: "insertOrderedList",
+			"ul"		: "insertUnorderedList",
+			"i"			: "italic",
+			"middel"	: "justifyCenter",
+			"full"		: "justifyFull",
+			"left"		: "justifyLeft",
+			"right"		: "justifyRight", 
+			"outdent"	: "outdent",
+			"unformat"	: "removeFormat",
+			"all"		: "selectAll",
+			"s"			: "strikethrough",
+			"sub"		: "subscript",
+			"sup"		: "superscript",
+			"u"			: "underline",
+		}
+		@fakeNative = {
+			"background": "backColor",
+			"a"			: "createLink",
+			"font"		: "fontName",
+			"fontSize"	: "fontSize",
+			"color"		: "foreColor",
+			"wrap"		: "formatBlock",
+			"html"		: "insertHTML",
+			"image"		: "insertImage",
+			"text"		: "insertText",
+		}
 
 	initiate: (item) ->
 		# Add the toolbar
@@ -28,8 +56,10 @@ class Rich
 			item.addEventListener('mousedown', ((e) ->
 				e.preventDefault()
 				toolbarItem = e.currentTarget
-				if item = ToolbarItems[toolbarItem.classList[0]]
-					@handleToolbarItemClick(item)
+				item = toolbarItem.classList[0]
+				if ToolbarItems[toolbarItem.classList[0]]
+					item = ToolbarItems[toolbarItem.classList[0]]
+				@handleToolbarItemClick(item)
 			).bind(@))
 
 	updateOriginalElement: () ->
@@ -49,10 +79,10 @@ class Rich
 	handleToolbarItemClick: (item) ->
 		if @isNative(item)
 			if @isRealNative(item)
-				document.execCommand(item)
+				document.execCommand(@native[item])
 			else
 				promptText = prompt()
-				document.execCommand(item, false, promptText)
+				document.execCommand(@fakeNative[item], false, promptText)
 		else
 			document.execCommand(item.command, false, item.value)
 	
@@ -65,6 +95,5 @@ class Rich
 			return true
 		else
 			return false
-
 
 new Rich()

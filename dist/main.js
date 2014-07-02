@@ -39,7 +39,36 @@ Rich = (function() {
       this.initiate(item);
     }
     this.addListeners();
-    this["native"] = ["backColor", "bold", "insertHorizontalRule", "indent", "insertOrderedList", "insertUnorderedList", "italic", "justifyCenter", "justifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo", "removeFormat", "selectAll", "strikethrough", "subscript", "superscript", "underline", "undo", "unlink"];
+    this["native"] = {
+      "b": "bold",
+      "hr": "insertHorizontalRule",
+      "indent": "indent",
+      "ol": "insertOrderedList",
+      "ul": "insertUnorderedList",
+      "i": "italic",
+      "middel": "justifyCenter",
+      "full": "justifyFull",
+      "left": "justifyLeft",
+      "right": "justifyRight",
+      "outdent": "outdent",
+      "unformat": "removeFormat",
+      "all": "selectAll",
+      "s": "strikethrough",
+      "sub": "subscript",
+      "sup": "superscript",
+      "u": "underline"
+    };
+    this.fakeNative = {
+      "background": "backColor",
+      "a": "createLink",
+      "font": "fontName",
+      "fontSize": "fontSize",
+      "color": "foreColor",
+      "wrap": "formatBlock",
+      "html": "insertHTML",
+      "image": "insertImage",
+      "text": "insertText"
+    };
   }
 
   Rich.prototype.initiate = function(item) {
@@ -68,9 +97,11 @@ Rich = (function() {
         var toolbarItem;
         e.preventDefault();
         toolbarItem = e.currentTarget;
-        if (item = ToolbarItems[toolbarItem.classList[0]]) {
-          return this.handleToolbarItemClick(item);
+        item = toolbarItem.classList[0];
+        if (ToolbarItems[toolbarItem.classList[0]]) {
+          item = ToolbarItems[toolbarItem.classList[0]];
         }
+        return this.handleToolbarItemClick(item);
       }).bind(this)));
     }
     return _results;
@@ -99,10 +130,10 @@ Rich = (function() {
     var promptText;
     if (this.isNative(item)) {
       if (this.isRealNative(item)) {
-        return document.execCommand(item);
+        return document.execCommand(this["native"][item]);
       } else {
         promptText = prompt();
-        return document.execCommand(item, false, promptText);
+        return document.execCommand(this.fakeNative[item], false, promptText);
       }
     } else {
       return document.execCommand(item.command, false, item.value);
