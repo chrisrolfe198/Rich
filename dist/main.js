@@ -25,8 +25,7 @@ RichToolbar = (function() {
 
 })();
 
-var Rich,
-  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+var Rich;
 
 Rich = (function() {
   function Rich() {
@@ -216,12 +215,10 @@ Rich = (function() {
   Rich.prototype.handleToolbarItemClick = function(item) {
     var promptText;
     if (this.isNative(item)) {
-      console.log('is native');
       if (this.isRealNative(item)) {
-        return document.execCommand(this["native"][item]);
+        return document.execCommand(this["native"][item].command);
       } else {
         promptText = prompt(this.fakeNative[item].prompt);
-        console.log(promptText);
         return document.execCommand(this.fakeNative[item].command, false, promptText);
       }
     } else {
@@ -237,7 +234,7 @@ Rich = (function() {
   };
 
   Rich.prototype.isRealNative = function(item) {
-    if (__indexOf.call(this["native"], item) >= 0) {
+    if (this["native"][item]) {
       return true;
     }
     return false;

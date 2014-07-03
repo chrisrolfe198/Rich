@@ -165,12 +165,10 @@ class Rich
 	
 	handleToolbarItemClick: (item) ->
 		if @isNative(item)
-			console.log('is native')
 			if @isRealNative(item)
-				document.execCommand(@native[item])
+				document.execCommand(@native[item].command)
 			else
 				promptText = prompt(@fakeNative[item].prompt)
-				console.log(promptText)
 				document.execCommand(@fakeNative[item].command, false, promptText)
 		else
 			document.execCommand(item.command, false, item.value)
@@ -180,7 +178,7 @@ class Rich
 		return false
 
 	isRealNative: (item) ->
-		return true if item in @native
+		return true if @native[item]
 		return false
 
 new Rich()
