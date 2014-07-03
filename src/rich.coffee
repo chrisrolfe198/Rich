@@ -29,7 +29,7 @@ class Rich
 				"command" 	: "italic",
 				"type" 		: "native",
 			},
-			"middel"	: { 
+			"middle"	: { 
 				"command" 	: "justifyCenter",
 				"type" 		: "native",
 			},
