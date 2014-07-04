@@ -1,6 +1,6 @@
 // Add items to the toolbar here
 var RichConfig = {
-	toolbar: "smiley,left,middle,right,full,indent,outdent,ol,ul,a,i,b,u,s,sup,sub,hr,font,fontSize,color,background,all,unformat,image,test,html,wrap"
+	toolbar: "smiley,left,middle,right,full,indent,outdent,ol,ul,a,i,b,u,s,sup,sub,hr,font,fontSize,color,background,undo,redo,all,unformat,image,test,html,wrap"
 }
 
 var ToolbarItems = {
