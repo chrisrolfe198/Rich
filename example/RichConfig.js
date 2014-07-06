@@ -1,6 +1,6 @@
 // Add items to the toolbar here
 var RichConfig = {
-	toolbar: "b,i,u,smiley,ul,a,background"
+	toolbar: "b,i,u,smiley,ul,link,background"
 }
 
 // Create custom toolbar items

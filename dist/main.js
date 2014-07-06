@@ -114,7 +114,7 @@ Rich = (function() {
         "type": "fakeNative",
         "prompt": "Enter a background color"
       },
-      "a": {
+      "link": {
         "command": "createLink",
         "type": "fakeNative",
         "prompt": "Enter the URL for the link (needs http://)"
