@@ -156,8 +156,10 @@ class Rich
 			).bind(@))
 
 	updateOriginalElement: () ->
+		richTextarea = document.querySelector('.rich-textarea')
 		document.querySelector('.rich-toolbar').addEventListener("mouseup", @listenerToUpdateOriginalElement)
-		document.querySelector('.rich-textarea').addEventListener("keyup", @listenerToUpdateOriginalElement)
+		richTextarea.addEventListener("keyup", @listenerToUpdateOriginalElement)
+		richTextarea.addEventListener("keypress", @forceTagLineBreaks)
 	
 	listenerToUpdateOriginalElement: (e) ->
 		if e.type == 'mouseup'
@@ -170,6 +172,9 @@ class Rich
 
 		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement and originalElement.classList.contains('rich')
 	
+	forceTagLineBreaks: (e) ->
+		document.execCommand('formatBlock', false, 'p') if e.keyCode == 13
+
 	handleToolbarItemClick: (item) ->
 		if @isNative(item)
 			if @isRealNative(item)

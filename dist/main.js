@@ -197,8 +197,11 @@ Rich = (function() {
   };
 
   Rich.prototype.updateOriginalElement = function() {
+    var richTextarea;
+    richTextarea = document.querySelector('.rich-textarea');
     document.querySelector('.rich-toolbar').addEventListener("mouseup", this.listenerToUpdateOriginalElement);
-    return document.querySelector('.rich-textarea').addEventListener("keyup", this.listenerToUpdateOriginalElement);
+    richTextarea.addEventListener("keyup", this.listenerToUpdateOriginalElement);
+    return richTextarea.addEventListener("keypress", this.forceTagLineBreaks);
   };
 
   Rich.prototype.listenerToUpdateOriginalElement = function(e) {
@@ -213,6 +216,12 @@ Rich = (function() {
     }
     if (richTextarea && originalElement && originalElement.classList.contains('rich')) {
       return originalElement.innerHTML = richTextarea.innerHTML;
+    }
+  };
+
+  Rich.prototype.forceTagLineBreaks = function(e) {
+    if (e.keyCode === 13) {
+      return document.execCommand('formatBlock', false, 'p');
     }
   };
 
