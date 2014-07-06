@@ -156,13 +156,14 @@ class Rich
 			).bind(@))
 
 	updateOriginalElement: () ->
-		document.querySelector('.rich-toolbar').addEventListener("mousedown", @listenerToUpdateOriginalElement)
+		document.querySelector('.rich-toolbar').addEventListener("mouseup", @listenerToUpdateOriginalElement)
 		document.querySelector('.rich-textarea').addEventListener("keyup", @listenerToUpdateOriginalElement)
 	
 	listenerToUpdateOriginalElement: (e) ->
-		if e.type == 'mousedown'
-			richTextarea = e.currentTarget.parentNode.nextElementSibling
-			originalElement = e.currentTarget.parentNode.previousElementSibling
+		if e.type == 'mouseup'
+			console.log(e.srcElement)
+			richTextarea = e.srcElement.parentNode.nextElementSibling
+			originalElement = e.srcElement.parentNode.previousElementSibling
 		else if e.type == 'keyup'
 			richTextarea = e.currentTarget
 			originalElement = e.currentTarget.previousElementSibling.previousElementSibling

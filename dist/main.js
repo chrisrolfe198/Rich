@@ -197,15 +197,16 @@ Rich = (function() {
   };
 
   Rich.prototype.updateOriginalElement = function() {
-    document.querySelector('.rich-toolbar').addEventListener("mousedown", this.listenerToUpdateOriginalElement);
+    document.querySelector('.rich-toolbar').addEventListener("mouseup", this.listenerToUpdateOriginalElement);
     return document.querySelector('.rich-textarea').addEventListener("keyup", this.listenerToUpdateOriginalElement);
   };
 
   Rich.prototype.listenerToUpdateOriginalElement = function(e) {
     var originalElement, richTextarea;
-    if (e.type === 'mousedown') {
-      richTextarea = e.currentTarget.parentNode.nextElementSibling;
-      originalElement = e.currentTarget.parentNode.previousElementSibling;
+    if (e.type === 'mouseup') {
+      console.log(e.srcElement);
+      richTextarea = e.srcElement.parentNode.nextElementSibling;
+      originalElement = e.srcElement.parentNode.previousElementSibling;
     } else if (e.type === 'keyup') {
       richTextarea = e.currentTarget;
       originalElement = e.currentTarget.previousElementSibling.previousElementSibling;
