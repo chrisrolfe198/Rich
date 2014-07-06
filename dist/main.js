@@ -165,11 +165,14 @@ Rich = (function() {
   };
 
   Rich.prototype.createContentEditableArea = function(item) {
-    var div;
+    var div, itemEntities, itemHTML;
     div = document.createElement("div");
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
-    div.innerHTML = item.innerHTML;
+    itemEntities = item.innerHTML;
+    itemHTML = itemEntities.replace(/&lt;/g, '<');
+    itemHTML = itemHTML.replace(/&gt;/g, '>');
+    div.innerHTML = itemHTML;
     return item.insertAdjacentHTML('afterEnd', div.outerHTML);
   };
 

@@ -134,7 +134,13 @@ class Rich
 		div = document.createElement("div")
 		div.setAttribute('contenteditable', 'true')
 		div.classList.add('rich-textarea')
-		div.innerHTML = item.innerHTML
+
+		itemEntities = item.innerHTML;
+
+		itemHTML = itemEntities.replace(/&lt;/g, '<');
+		itemHTML = itemHTML.replace(/&gt;/g, '>');
+
+		div.innerHTML = itemHTML
 		item.insertAdjacentHTML('afterEnd', div.outerHTML)
 	
 	addListeners: () ->
