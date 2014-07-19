@@ -127,7 +127,7 @@ class Rich
 		@createContentEditableArea(item)
 		item.insertAdjacentHTML('afterEnd', @toolbar.outerHTML)
 		item.style.display = 'none'
-		@updateOriginalElement()
+		@updateOriginalElement(item)
 		# Replace any form fields with a content editable div and update the form? On submit?
 
 	createContentEditableArea: (item) ->
@@ -148,10 +148,10 @@ class Rich
 		for item in toolbarItems
 			item.addEventListener('mousedown', ((e) ->
 				e.preventDefault()
-				toolbarItem = e.currentTarget
+				toolbarItem = e.current
 				item = toolbarItem.classList[0]
-				if ToolbarItems[toolbarItem.classList[0]]
-					item = ToolbarItems[toolbarItem.classList[0]]
+				if ToolbarItems[item]
+					item = ToolbarItems[item]
 				@handleToolbarItemClick(item)
 			).bind(@))
 
@@ -171,13 +171,15 @@ class Rich
 				textarea.innerHTML = richText.innerHTML
 			)
 
-	updateOriginalElement: () ->
-		richTextarea = document.querySelector('.rich-textarea')
-		document.querySelector('.rich-toolbar').addEventListener("mouseup", @listenerToUpdateOriginalElement)
+	updateOriginalElement: (item) ->
+		richToolbar = item.nextElementSibling
+		richTextarea = richToolbar.nextElementSibling
+		richToolbar.addEventListener("mouseup", @listenerToUpdateOriginalElement)
 		richTextarea.addEventListener("keyup", @listenerToUpdateOriginalElement)
 		richTextarea.addEventListener("keypress", @forceTagLineBreaks)
 
 	listenerToUpdateOriginalElement: (e) ->
+		e.preventDefault()
 		if e.type == 'mouseup'
 			richTextarea = e.srcElement.parentNode.nextElementSibling
 			originalElement = e.srcElement.parentNode.previousElementSibling
@@ -208,4 +210,4 @@ class Rich
 		return true if @native[item]
 		return false
 
-new Rich()
+new Rich();

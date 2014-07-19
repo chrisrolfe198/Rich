@@ -161,7 +161,7 @@ Rich = (function() {
     this.createContentEditableArea(item);
     item.insertAdjacentHTML('afterEnd', this.toolbar.outerHTML);
     item.style.display = 'none';
-    return this.updateOriginalElement();
+    return this.updateOriginalElement(item);
   };
 
   Rich.prototype.createContentEditableArea = function(item) {
@@ -184,10 +184,10 @@ Rich = (function() {
       item.addEventListener('mousedown', (function(e) {
         var toolbarItem;
         e.preventDefault();
-        toolbarItem = e.currentTarget;
+        toolbarItem = e.current;
         item = toolbarItem.classList[0];
-        if (ToolbarItems[toolbarItem.classList[0]]) {
-          item = ToolbarItems[toolbarItem.classList[0]];
+        if (ToolbarItems[item]) {
+          item = ToolbarItems[item];
         }
         return this.handleToolbarItemClick(item);
       }).bind(this));
@@ -231,16 +231,18 @@ Rich = (function() {
     return _results;
   };
 
-  Rich.prototype.updateOriginalElement = function() {
-    var richTextarea;
-    richTextarea = document.querySelector('.rich-textarea');
-    document.querySelector('.rich-toolbar').addEventListener("mouseup", this.listenerToUpdateOriginalElement);
+  Rich.prototype.updateOriginalElement = function(item) {
+    var richTextarea, richToolbar;
+    richToolbar = item.nextElementSibling;
+    richTextarea = richToolbar.nextElementSibling;
+    richToolbar.addEventListener("mouseup", this.listenerToUpdateOriginalElement);
     richTextarea.addEventListener("keyup", this.listenerToUpdateOriginalElement);
     return richTextarea.addEventListener("keypress", this.forceTagLineBreaks);
   };
 
   Rich.prototype.listenerToUpdateOriginalElement = function(e) {
     var originalElement, richTextarea;
+    e.preventDefault();
     if (e.type === 'mouseup') {
       richTextarea = e.srcElement.parentNode.nextElementSibling;
       originalElement = e.srcElement.parentNode.previousElementSibling;
