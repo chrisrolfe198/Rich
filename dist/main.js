@@ -183,8 +183,7 @@ Rich = (function() {
       item = toolbarItems[_i];
       item.addEventListener('mousedown', (function(e) {
         var toolbarItem;
-        e.preventDefault();
-        toolbarItem = e.current;
+        toolbarItem = e.currentTarget;
         item = toolbarItem.classList[0];
         if (ToolbarItems[item]) {
           item = ToolbarItems[item];

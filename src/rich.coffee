@@ -147,8 +147,7 @@ class Rich
 		toolbarItems = document.querySelectorAll('.rich-toolbar-item')
 		for item in toolbarItems
 			item.addEventListener('mousedown', ((e) ->
-				e.preventDefault()
-				toolbarItem = e.current
+				toolbarItem = e.currentTarget
 				item = toolbarItem.classList[0]
 				if ToolbarItems[item]
 					item = ToolbarItems[item]
