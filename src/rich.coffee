@@ -5,117 +5,117 @@ class Rich
 		@initiate(item) for item in @instances
 		@addListeners()
 		@native = {
-			"b"			: { 
+			"b"			: {
 				"command" 	: "bold",
 				"type" 		: "native",
 			},
-			"hr"		: { 
+			"hr"		: {
 				"command" 	: "insertHorizontalRule",
 				"type" 		: "native",
 			},
-			"indent"	: { 
+			"indent"	: {
 				"command" 	: "indent",
 				"type" 		: "native",
 			},
-			"ol"		: { 
+			"ol"		: {
 				"command" 	: "insertOrderedList",
 				"type" 		: "native",
 			},
-			"ul"		: { 
+			"ul"		: {
 				"command" 	: "insertUnorderedList",
 				"type" 		: "native",
 			},
-			"i"			: { 
+			"i"			: {
 				"command" 	: "italic",
 				"type" 		: "native",
 			},
-			"middle"	: { 
+			"middle"	: {
 				"command" 	: "justifyCenter",
 				"type" 		: "native",
 			},
-			"full"		: { 
+			"full"		: {
 				"command" 	: "justifyFull",
 				"type" 		: "native",
 			},
-			"left"		: { 
+			"left"		: {
 				"command" 	: "justifyLeft",
 				"type" 		: "native",
 			},
-			"right"		: { 
-				"command" 	: "justifyRight", 
+			"right"		: {
+				"command" 	: "justifyRight",
 				"type" 		: "native",
 			},
-			"outdent"	: { 
+			"outdent"	: {
 				"command" 	: "outdent",
 				"type" 		: "native",
 			},
-			"unformat"	: { 
+			"unformat"	: {
 				"command" 	: "removeFormat",
 				"type" 		: "native",
 			},
-			"all"		: { 
+			"all"		: {
 				"command" 	: "selectAll",
 				"type" 		: "native",
 			},
-			"s"			: { 
+			"s"			: {
 				"command" 	: "strikethrough",
 				"type" 		: "native",
 			},
-			"sub"		: { 
+			"sub"		: {
 				"command" 	: "subscript",
 				"type" 		: "native",
 			},
-			"sup"		: { 
+			"sup"		: {
 				"command" 	: "superscript",
 				"type" 		: "native",
 			},
-			"u"			: { 
+			"u"			: {
 				"command" 	: "underline",
 				"type" 		: "native",
 			},
 		}
 		@fakeNative = {
-			"background": { 
+			"background": {
 				"command" 	: "backColor",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a background color",
 			},
-			"link"			: { 
+			"link"			: {
 				"command" 	: "createLink",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter the URL for the link (needs http://)",
 			},
-			"font"		: { 
+			"font"		: {
 				"command" 	: "fontName",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a font name",
 			},
-			"fontSize"	: { 
+			"fontSize"	: {
 				"command" 	: "fontSize",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a font size (1-7)",
 			},
-			"color"		: { 
+			"color"		: {
 				"command" 	: "foreColor",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a foreground color",
 			},
-			"wrap"		: { 
+			"wrap"		: {
 				"command" 	: "formatBlock",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter the html for format the block with",
 			},
-			"html"		: { 
+			"html"		: {
 				"command" 	: "insertHTML",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter HTML",
 			},
-			"image"		: { 
+			"image"		: {
 				"command" 	: "insertImage",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter an image URL",
 			},
-			"text"		: { 
+			"text"		: {
 				"command" 	: "insertText",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter text",
@@ -142,7 +142,7 @@ class Rich
 
 		div.innerHTML = itemHTML
 		item.insertAdjacentHTML('afterEnd', div.outerHTML)
-	
+
 	addListeners: () ->
 		toolbarItems = document.querySelectorAll('.rich-toolbar-item')
 		for item in toolbarItems
@@ -155,15 +155,20 @@ class Rich
 				@handleToolbarItemClick(item)
 			).bind(@))
 
+		forms = document.getElementsByTagName('form')
+		for form in forms
+			form.addEventListener('submit', (e) ->
+				e.target[1].innerHTML = e.target[1].nextSibling.nextSibling.innerHTML;
+			)
+
 	updateOriginalElement: () ->
 		richTextarea = document.querySelector('.rich-textarea')
 		document.querySelector('.rich-toolbar').addEventListener("mouseup", @listenerToUpdateOriginalElement)
 		richTextarea.addEventListener("keyup", @listenerToUpdateOriginalElement)
 		richTextarea.addEventListener("keypress", @forceTagLineBreaks)
-	
+
 	listenerToUpdateOriginalElement: (e) ->
 		if e.type == 'mouseup'
-			console.log(e.srcElement)
 			richTextarea = e.srcElement.parentNode.nextElementSibling
 			originalElement = e.srcElement.parentNode.previousElementSibling
 		else if e.type == 'keyup'
@@ -171,7 +176,7 @@ class Rich
 			originalElement = e.currentTarget.previousElementSibling.previousElementSibling
 
 		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement and originalElement.classList.contains('rich')
-	
+
 	forceTagLineBreaks: (e) ->
 		document.execCommand('formatBlock', false, 'p') if e.keyCode == 13
 
@@ -184,7 +189,7 @@ class Rich
 				document.execCommand(@fakeNative[item].command, false, promptText)
 		else
 			document.execCommand(item.command, false, item.value)
-	
+
 	isNative: (item) ->
 		return true if @native[item] or @fakeNative[item]
 		return false

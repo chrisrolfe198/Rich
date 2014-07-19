@@ -177,12 +177,11 @@ Rich = (function() {
   };
 
   Rich.prototype.addListeners = function() {
-    var item, toolbarItems, _i, _len, _results;
+    var form, forms, item, toolbarItems, _i, _j, _len, _len1, _results;
     toolbarItems = document.querySelectorAll('.rich-toolbar-item');
-    _results = [];
     for (_i = 0, _len = toolbarItems.length; _i < _len; _i++) {
       item = toolbarItems[_i];
-      _results.push(item.addEventListener('mousedown', (function(e) {
+      item.addEventListener('mousedown', (function(e) {
         var toolbarItem;
         e.preventDefault();
         toolbarItem = e.currentTarget;
@@ -191,7 +190,15 @@ Rich = (function() {
           item = ToolbarItems[toolbarItem.classList[0]];
         }
         return this.handleToolbarItemClick(item);
-      }).bind(this)));
+      }).bind(this));
+    }
+    forms = document.getElementsByTagName('form');
+    _results = [];
+    for (_j = 0, _len1 = forms.length; _j < _len1; _j++) {
+      form = forms[_j];
+      _results.push(form.addEventListener('submit', function(e) {
+        return e.target[1].innerHTML = e.target[1].nextSibling.nextSibling.innerHTML;
+      }));
     }
     return _results;
   };
@@ -207,7 +214,6 @@ Rich = (function() {
   Rich.prototype.listenerToUpdateOriginalElement = function(e) {
     var originalElement, richTextarea;
     if (e.type === 'mouseup') {
-      console.log(e.srcElement);
       richTextarea = e.srcElement.parentNode.nextElementSibling;
       originalElement = e.srcElement.parentNode.previousElementSibling;
     } else if (e.type === 'keyup') {
