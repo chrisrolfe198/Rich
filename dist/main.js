@@ -197,7 +197,35 @@ Rich = (function() {
     for (_j = 0, _len1 = forms.length; _j < _len1; _j++) {
       form = forms[_j];
       _results.push(form.addEventListener('submit', function(e) {
-        return e.target[1].innerHTML = e.target[1].nextSibling.nextSibling.innerHTML;
+        var child, richText, textarea, _k, _l, _len2, _len3, _ref, _ref1;
+        _ref = e.target.children;
+        for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
+          item = _ref[_k];
+          if (!item.classList && !item.length) {
+            break;
+          }
+          if (item.children.length) {
+            _ref1 = item.children;
+            for (_l = 0, _len3 = _ref1.length; _l < _len3; _l++) {
+              child = _ref1[_l];
+              if (child.classList.contains('rich')) {
+                textarea = child;
+              }
+              if (child.classList.contains('rich-textarea')) {
+                richText = child;
+              }
+            }
+          }
+          if (item.classList) {
+            if (item.classList.contains('rich')) {
+              textarea = item;
+            }
+            if (item.classList.contains('rich-textarea')) {
+              richText = item;
+            }
+          }
+        }
+        return textarea.innerHTML = richText.innerHTML;
       }));
     }
     return _results;

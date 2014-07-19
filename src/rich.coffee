@@ -158,7 +158,17 @@ class Rich
 		forms = document.getElementsByTagName('form')
 		for form in forms
 			form.addEventListener('submit', (e) ->
-				e.target[1].innerHTML = e.target[1].nextSibling.nextSibling.innerHTML;
+				for item in e.target.children
+					break if (!item.classList and !item.length);
+					if (item.children.length)
+						for child in item.children
+							textarea = child if (child.classList.contains('rich'))
+							richText = child if (child.classList.contains('rich-textarea'))
+					if (item.classList)
+						textarea = item if (item.classList.contains('rich'))
+						richText = item if (item.classList.contains('rich-textarea'))
+
+				textarea.innerHTML = richText.innerHTML
 			)
 
 	updateOriginalElement: () ->
