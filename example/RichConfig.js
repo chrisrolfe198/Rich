@@ -8,5 +8,5 @@ var ToolbarItems = {
 	"smiley": {
 		"command": "insertImage",
 		"value": "http://bit.ly/1shQN2U"
-	},
+	}
 }

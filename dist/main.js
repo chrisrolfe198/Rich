@@ -270,7 +270,11 @@ Rich = (function() {
         return document.execCommand(this.fakeNative[item].command, false, promptText);
       }
     } else {
-      return document.execCommand(item.command, false, item.value);
+      if (item.callback) {
+        return item.callback();
+      } else {
+        return document.execCommand(item.command, false, item.value);
+      }
     }
   };
 

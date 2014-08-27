@@ -199,7 +199,10 @@ class Rich
 				promptText = prompt(@fakeNative[item].prompt)
 				document.execCommand(@fakeNative[item].command, false, promptText)
 		else
-			document.execCommand(item.command, false, item.value)
+			if item.callback
+				item.callback()
+			else
+				document.execCommand(item.command, false, item.value)
 
 	isNative: (item) ->
 		return true if @native[item] or @fakeNative[item]
