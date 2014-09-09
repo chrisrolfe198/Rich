@@ -114,7 +114,7 @@ Rich = (function() {
         "type": "fakeNative",
         "prompt": "Enter a background color"
       },
-      "a": {
+      "link": {
         "command": "createLink",
         "type": "fakeNative",
         "prompt": "Enter the URL for the link (needs http://)"
@@ -161,59 +161,109 @@ Rich = (function() {
     this.createContentEditableArea(item);
     item.insertAdjacentHTML('afterEnd', this.toolbar.outerHTML);
     item.style.display = 'none';
-    return this.updateOriginalElement();
+    return this.updateOriginalElement(item);
   };
 
   Rich.prototype.createContentEditableArea = function(item) {
-    var div;
+    var div, itemEntities, itemHTML;
     div = document.createElement("div");
     div.setAttribute('contenteditable', 'true');
     div.classList.add('rich-textarea');
-    div.innerHTML = item.innerHTML;
+    itemEntities = item.innerHTML;
+    itemHTML = itemEntities.replace(/&lt;/g, '<');
+    itemHTML = itemHTML.replace(/&gt;/g, '>');
+    div.innerHTML = itemHTML;
     return item.insertAdjacentHTML('afterEnd', div.outerHTML);
   };
 
   Rich.prototype.addListeners = function() {
-    var item, toolbarItems, _i, _len, _results;
+    var form, forms, item, toolbarItems, _i, _j, _len, _len1, _results;
     toolbarItems = document.querySelectorAll('.rich-toolbar-item');
-    _results = [];
     for (_i = 0, _len = toolbarItems.length; _i < _len; _i++) {
       item = toolbarItems[_i];
-      _results.push(item.addEventListener('mousedown', (function(e) {
+      item.addEventListener('mousedown', (function(e) {
         var toolbarItem;
-        e.preventDefault();
         toolbarItem = e.currentTarget;
         item = toolbarItem.classList[0];
-        if (ToolbarItems[toolbarItem.classList[0]]) {
-          item = ToolbarItems[toolbarItem.classList[0]];
+        if (ToolbarItems[item]) {
+          item = ToolbarItems[item];
         }
         return this.handleToolbarItemClick(item);
-      }).bind(this)));
+      }).bind(this));
+    }
+    forms = document.getElementsByTagName('form');
+    _results = [];
+    for (_j = 0, _len1 = forms.length; _j < _len1; _j++) {
+      form = forms[_j];
+      _results.push(form.addEventListener('submit', function(e) {
+        var child, richText, textarea, _k, _l, _len2, _len3, _ref, _ref1;
+        _ref = e.target.children;
+        for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
+          item = _ref[_k];
+          if (!item.classList && !item.length) {
+            break;
+          }
+          if (item.children.length) {
+            _ref1 = item.children;
+            for (_l = 0, _len3 = _ref1.length; _l < _len3; _l++) {
+              child = _ref1[_l];
+              if (child.classList.contains('rich')) {
+                textarea = child;
+              }
+              if (child.classList.contains('rich-textarea')) {
+                richText = child;
+              }
+            }
+          }
+          if (item.classList) {
+            if (item.classList.contains('rich')) {
+              textarea = item;
+            }
+            if (item.classList.contains('rich-textarea')) {
+              richText = item;
+            }
+          }
+        }
+        return textarea.innerHTML = richText.innerHTML;
+      }));
     }
     return _results;
   };
 
-  Rich.prototype.updateOriginalElement = function() {
-    document.querySelector('.rich-toolbar').addEventListener("mousedown", this.listenerToUpdateOriginalElement);
-    return document.querySelector('.rich-textarea').addEventListener("keyup", this.listenerToUpdateOriginalElement);
+  Rich.prototype.updateOriginalElement = function(item) {
+    var richTextarea, richToolbar;
+    richToolbar = item.nextElementSibling;
+    richTextarea = richToolbar.nextElementSibling;
+    richToolbar.addEventListener("mouseup", this.listenerToUpdateOriginalElement);
+    richTextarea.addEventListener("keyup", this.listenerToUpdateOriginalElement);
+    return richTextarea.addEventListener("keypress", this.forceTagLineBreaks);
   };
 
   Rich.prototype.listenerToUpdateOriginalElement = function(e) {
     var originalElement, richTextarea;
-    if (e.type === 'mousedown') {
-      richTextarea = e.currentTarget.parentNode.nextElementSibling;
-      originalElement = e.currentTarget.parentNode.previousElementSibling;
+    e.preventDefault();
+    if (e.type === 'mouseup') {
+      richTextarea = e.srcElement.parentNode.nextElementSibling;
+      originalElement = e.srcElement.parentNode.previousElementSibling;
     } else if (e.type === 'keyup') {
       richTextarea = e.currentTarget;
       originalElement = e.currentTarget.previousElementSibling.previousElementSibling;
     }
     if (richTextarea && originalElement && originalElement.classList.contains('rich')) {
-      return originalElement.innerHTML = richTextarea.innerHTML;
+      originalElement.innerHTML = richTextarea.innerHTML;
+      return console.log("updated");
+    }
+  };
+
+  Rich.prototype.forceTagLineBreaks = function(e) {
+    if (e.keyCode === 13) {
+      return document.execCommand('formatBlock', false, 'p');
     }
   };
 
   Rich.prototype.handleToolbarItemClick = function(item) {
     var promptText;
+    console.log('clicked');
     if (this.isNative(item)) {
       if (this.isRealNative(item)) {
         return document.execCommand(this["native"][item].command);
@@ -222,7 +272,11 @@ Rich = (function() {
         return document.execCommand(this.fakeNative[item].command, false, promptText);
       }
     } else {
-      return document.execCommand(item.command, false, item.value);
+      if (item.callback) {
+        return item.callback();
+      } else {
+        return document.execCommand(item.command, false, item.value);
+      }
     }
   };
 

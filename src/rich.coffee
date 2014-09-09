@@ -5,117 +5,117 @@ class Rich
 		@initiate(item) for item in @instances
 		@addListeners()
 		@native = {
-			"b"			: { 
+			"b"			: {
 				"command" 	: "bold",
 				"type" 		: "native",
 			},
-			"hr"		: { 
+			"hr"		: {
 				"command" 	: "insertHorizontalRule",
 				"type" 		: "native",
 			},
-			"indent"	: { 
+			"indent"	: {
 				"command" 	: "indent",
 				"type" 		: "native",
 			},
-			"ol"		: { 
+			"ol"		: {
 				"command" 	: "insertOrderedList",
 				"type" 		: "native",
 			},
-			"ul"		: { 
+			"ul"		: {
 				"command" 	: "insertUnorderedList",
 				"type" 		: "native",
 			},
-			"i"			: { 
+			"i"			: {
 				"command" 	: "italic",
 				"type" 		: "native",
 			},
-			"middle"	: { 
+			"middle"	: {
 				"command" 	: "justifyCenter",
 				"type" 		: "native",
 			},
-			"full"		: { 
+			"full"		: {
 				"command" 	: "justifyFull",
 				"type" 		: "native",
 			},
-			"left"		: { 
+			"left"		: {
 				"command" 	: "justifyLeft",
 				"type" 		: "native",
 			},
-			"right"		: { 
-				"command" 	: "justifyRight", 
+			"right"		: {
+				"command" 	: "justifyRight",
 				"type" 		: "native",
 			},
-			"outdent"	: { 
+			"outdent"	: {
 				"command" 	: "outdent",
 				"type" 		: "native",
 			},
-			"unformat"	: { 
+			"unformat"	: {
 				"command" 	: "removeFormat",
 				"type" 		: "native",
 			},
-			"all"		: { 
+			"all"		: {
 				"command" 	: "selectAll",
 				"type" 		: "native",
 			},
-			"s"			: { 
+			"s"			: {
 				"command" 	: "strikethrough",
 				"type" 		: "native",
 			},
-			"sub"		: { 
+			"sub"		: {
 				"command" 	: "subscript",
 				"type" 		: "native",
 			},
-			"sup"		: { 
+			"sup"		: {
 				"command" 	: "superscript",
 				"type" 		: "native",
 			},
-			"u"			: { 
+			"u"			: {
 				"command" 	: "underline",
 				"type" 		: "native",
 			},
 		}
 		@fakeNative = {
-			"background": { 
+			"background": {
 				"command" 	: "backColor",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a background color",
 			},
-			"a"			: { 
+			"link"			: {
 				"command" 	: "createLink",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter the URL for the link (needs http://)",
 			},
-			"font"		: { 
+			"font"		: {
 				"command" 	: "fontName",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a font name",
 			},
-			"fontSize"	: { 
+			"fontSize"	: {
 				"command" 	: "fontSize",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a font size (1-7)",
 			},
-			"color"		: { 
+			"color"		: {
 				"command" 	: "foreColor",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter a foreground color",
 			},
-			"wrap"		: { 
+			"wrap"		: {
 				"command" 	: "formatBlock",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter the html for format the block with",
 			},
-			"html"		: { 
+			"html"		: {
 				"command" 	: "insertHTML",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter HTML",
 			},
-			"image"		: { 
+			"image"		: {
 				"command" 	: "insertImage",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter an image URL",
 			},
-			"text"		: { 
+			"text"		: {
 				"command" 	: "insertText",
 				"type"		: "fakeNative",
 				"prompt"	: "Enter text",
@@ -127,43 +127,74 @@ class Rich
 		@createContentEditableArea(item)
 		item.insertAdjacentHTML('afterEnd', @toolbar.outerHTML)
 		item.style.display = 'none'
-		@updateOriginalElement()
+		@updateOriginalElement(item)
 		# Replace any form fields with a content editable div and update the form? On submit?
 
 	createContentEditableArea: (item) ->
 		div = document.createElement("div")
 		div.setAttribute('contenteditable', 'true')
 		div.classList.add('rich-textarea')
-		div.innerHTML = item.innerHTML
+
+		itemEntities = item.innerHTML;
+
+		itemHTML = itemEntities.replace(/&lt;/g, '<');
+		itemHTML = itemHTML.replace(/&gt;/g, '>');
+
+		div.innerHTML = itemHTML
 		item.insertAdjacentHTML('afterEnd', div.outerHTML)
-	
+
 	addListeners: () ->
 		toolbarItems = document.querySelectorAll('.rich-toolbar-item')
 		for item in toolbarItems
 			item.addEventListener('mousedown', ((e) ->
-				e.preventDefault()
 				toolbarItem = e.currentTarget
 				item = toolbarItem.classList[0]
-				if ToolbarItems[toolbarItem.classList[0]]
-					item = ToolbarItems[toolbarItem.classList[0]]
+				if ToolbarItems[item]
+					item = ToolbarItems[item]
 				@handleToolbarItemClick(item)
 			).bind(@))
 
-	updateOriginalElement: () ->
-		document.querySelector('.rich-toolbar').addEventListener("mousedown", @listenerToUpdateOriginalElement)
-		document.querySelector('.rich-textarea').addEventListener("keyup", @listenerToUpdateOriginalElement)
-	
+		forms = document.getElementsByTagName('form')
+		for form in forms
+			form.addEventListener('submit', (e) ->
+				for item in e.target.children
+					break if (!item.classList and !item.length);
+					if (item.children.length)
+						for child in item.children
+							textarea = child if (child.classList.contains('rich'))
+							richText = child if (child.classList.contains('rich-textarea'))
+					if (item.classList)
+						textarea = item if (item.classList.contains('rich'))
+						richText = item if (item.classList.contains('rich-textarea'))
+
+				textarea.innerHTML = richText.innerHTML
+			)
+
+	updateOriginalElement: (item) ->
+		richToolbar = item.nextElementSibling
+		richTextarea = richToolbar.nextElementSibling
+		richToolbar.addEventListener("mouseup", @listenerToUpdateOriginalElement)
+		richTextarea.addEventListener("keyup", @listenerToUpdateOriginalElement)
+		richTextarea.addEventListener("keypress", @forceTagLineBreaks)
+
 	listenerToUpdateOriginalElement: (e) ->
-		if e.type == 'mousedown'
-			richTextarea = e.currentTarget.parentNode.nextElementSibling
-			originalElement = e.currentTarget.parentNode.previousElementSibling
+		e.preventDefault()
+		if e.type == 'mouseup'
+			richTextarea = e.srcElement.parentNode.nextElementSibling
+			originalElement = e.srcElement.parentNode.previousElementSibling
 		else if e.type == 'keyup'
 			richTextarea = e.currentTarget
 			originalElement = e.currentTarget.previousElementSibling.previousElementSibling
 
-		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement and originalElement.classList.contains('rich')
-	
+		if richTextarea and originalElement and originalElement.classList.contains('rich')
+			originalElement.innerHTML = richTextarea.innerHTML
+			console.log("updated");
+
+	forceTagLineBreaks: (e) ->
+		document.execCommand('formatBlock', false, 'p') if e.keyCode == 13
+
 	handleToolbarItemClick: (item) ->
+		console.log('clicked');
 		if @isNative(item)
 			if @isRealNative(item)
 				document.execCommand(@native[item].command)
@@ -171,8 +202,11 @@ class Rich
 				promptText = prompt(@fakeNative[item].prompt)
 				document.execCommand(@fakeNative[item].command, false, promptText)
 		else
-			document.execCommand(item.command, false, item.value)
-	
+			if item.callback
+				item.callback()
+			else
+				document.execCommand(item.command, false, item.value)
+
 	isNative: (item) ->
 		return true if @native[item] or @fakeNative[item]
 		return false
@@ -181,4 +215,4 @@ class Rich
 		return true if @native[item]
 		return false
 
-new Rich()
+new Rich();
