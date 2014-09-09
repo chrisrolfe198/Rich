@@ -152,6 +152,7 @@ class Rich
 				if ToolbarItems[item]
 					item = ToolbarItems[item]
 				@handleToolbarItemClick(item)
+				@listenerToUpdateOriginalElement(e)
 			).bind(@))
 
 		forms = document.getElementsByTagName('form')
@@ -185,16 +186,16 @@ class Rich
 		else if e.type == 'keyup'
 			richTextarea = e.currentTarget
 			originalElement = e.currentTarget.previousElementSibling.previousElementSibling
+		else if e.type == 'mousedown'
+			richTextarea = e.srcElement.parentNode.nextElementSibling
+			originalElement = e.srcElement.parentNode.previousElementSibling
 
-		if richTextarea and originalElement and originalElement.classList.contains('rich')
-			originalElement.innerHTML = richTextarea.innerHTML
-			console.log("updated");
+		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement and originalElement.classList.contains('rich')
 
 	forceTagLineBreaks: (e) ->
 		document.execCommand('formatBlock', false, 'p') if e.keyCode == 13
 
 	handleToolbarItemClick: (item) ->
-		console.log('clicked');
 		if @isNative(item)
 			if @isRealNative(item)
 				document.execCommand(@native[item].command)
