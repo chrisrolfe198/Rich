@@ -186,12 +186,15 @@ class Rich
 			richTextarea = e.currentTarget
 			originalElement = e.currentTarget.previousElementSibling.previousElementSibling
 
-		originalElement.innerHTML = richTextarea.innerHTML if richTextarea and originalElement and originalElement.classList.contains('rich')
+		if richTextarea and originalElement and originalElement.classList.contains('rich')
+			originalElement.innerHTML = richTextarea.innerHTML
+			console.log("updated");
 
 	forceTagLineBreaks: (e) ->
 		document.execCommand('formatBlock', false, 'p') if e.keyCode == 13
 
 	handleToolbarItemClick: (item) ->
+		console.log('clicked');
 		if @isNative(item)
 			if @isRealNative(item)
 				document.execCommand(@native[item].command)

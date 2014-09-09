@@ -250,7 +250,8 @@ Rich = (function() {
       originalElement = e.currentTarget.previousElementSibling.previousElementSibling;
     }
     if (richTextarea && originalElement && originalElement.classList.contains('rich')) {
-      return originalElement.innerHTML = richTextarea.innerHTML;
+      originalElement.innerHTML = richTextarea.innerHTML;
+      return console.log("updated");
     }
   };
 
@@ -262,6 +263,7 @@ Rich = (function() {
 
   Rich.prototype.handleToolbarItemClick = function(item) {
     var promptText;
+    console.log('clicked');
     if (this.isNative(item)) {
       if (this.isRealNative(item)) {
         return document.execCommand(this["native"][item].command);
