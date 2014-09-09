@@ -188,7 +188,8 @@ Rich = (function() {
         if (ToolbarItems[item]) {
           item = ToolbarItems[item];
         }
-        return this.handleToolbarItemClick(item);
+        this.handleToolbarItemClick(item);
+        return this.listenerToUpdateOriginalElement(e);
       }).bind(this));
     }
     forms = document.getElementsByTagName('form');
@@ -248,10 +249,12 @@ Rich = (function() {
     } else if (e.type === 'keyup') {
       richTextarea = e.currentTarget;
       originalElement = e.currentTarget.previousElementSibling.previousElementSibling;
+    } else if (e.type === 'mousedown') {
+      richTextarea = e.srcElement.parentNode.nextElementSibling;
+      originalElement = e.srcElement.parentNode.previousElementSibling;
     }
     if (richTextarea && originalElement && originalElement.classList.contains('rich')) {
-      originalElement.innerHTML = richTextarea.innerHTML;
-      return console.log("updated");
+      return originalElement.innerHTML = richTextarea.innerHTML;
     }
   };
 
@@ -263,7 +266,6 @@ Rich = (function() {
 
   Rich.prototype.handleToolbarItemClick = function(item) {
     var promptText;
-    console.log('clicked');
     if (this.isNative(item)) {
       if (this.isRealNative(item)) {
         return document.execCommand(this["native"][item].command);
