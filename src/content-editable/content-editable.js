@@ -1,12 +1,14 @@
 function ContentEditable() {
-	if (!window.Rich) window.Rich = this;
-	return window.Rich;
+	this.commands = [];
 }
 
 ContentEditable.prototype.call = function() {
 	// Bold
 }
 
-ContentEditable.prototype.extend = function() {
-	// 
+ContentEditable.prototype.extend = function(name, callback) {
+	this.commands[name] = callback;
+	console.log(this.commands);
 }
+
+module.exports = new ContentEditable;
