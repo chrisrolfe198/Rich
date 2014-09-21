@@ -1,23 +1,15 @@
 var gulp = require('gulp'),
-	gulpif = require('gulp-if'),
-	sass = require('gulp-compass'),
-	coffee = require('gulp-coffee'),
-	coffeelint = require('gulp-coffeelint'),
-	autoprefixer = require('gulp-autoprefixer'),
-	minifycss = require('gulp-minify-css'),
 	jshint = require('gulp-jshint'),
 	uglify = require('gulp-uglify'),
-	imagemin = require('gulp-imagemin'),
 	rename = require('gulp-rename'),
 	clean = require('gulp-clean'),
 	concat = require('gulp-concat'),
-	notify = require('gulp-notify'),
-	cache = require('gulp-cache')
+	browserify = require('gulp-browserify'),
+	notify = require('gulp-notify');
 
 	gulp.task('scripts', function() {
-		return gulp.src(['src/toolbar.coffee','src/rich.coffee'])
-			.pipe(gulpif(/[.]coffee$/, coffee({ bare: true }).on('error', function(err) { console.log(err); })))
-			.pipe(concat('main.js'))
+		return gulp.src(['src/main.js'])
+			.pipe(browserify())
 			.pipe(gulp.dest('dist'))
 			.pipe(rename({suffix: '.min'}))
 			.pipe(uglify())
@@ -36,6 +28,6 @@ var gulp = require('gulp'),
 
 	gulp.task('watch', function() {
 		// Watch .js files
-		gulp.watch('src/**/*.coffee', ['scripts']);
+		gulp.watch('src/**/*.js', ['scripts']);
 	});
 
