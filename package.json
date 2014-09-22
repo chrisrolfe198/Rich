@@ -1,8 +1,8 @@
 {
   "name": "Rich",
-  "version": "1.2.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "A lightweight Rich text editor built on the content editable attribute",
+  "main": "dist/main.min.js",
   "devDependencies": {
     "gulp": "*",
     "gulp-clean": "*",
@@ -19,6 +19,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": {
+      "name": "Christopher Rolfe",
+      "email": "christopher.rolfe198@gmail.com",
+      "url": "chrisrolfe.info"
+  },
+  "license": "MIT"
 }
