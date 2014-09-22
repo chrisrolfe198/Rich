@@ -39,6 +39,7 @@ function editor() {
 
 editor.prototype.initialise = function(area) {
     this.createDiv(area);
+    this.attachListener(area);
 }
 
 editor.prototype.createDiv = function(appender) {
@@ -48,6 +49,17 @@ editor.prototype.createDiv = function(appender) {
     div.setAttribute('contenteditable', true);
 
     this.insertAfter(div, appender);
+}
+
+editor.prototype.attachListener = function(area) {
+    area.nextSibling.addEventListener('keyup', this.updateOriginalElement);
+}
+
+editor.prototype.updateOriginalElement = function(e) {
+    var rich = e.currentTarget;
+    var textarea = rich.previousSibling;
+
+    textarea.innerHTML = rich.innerHTML;
 }
 
 // Adapted from http://stackoverflow.com/a/4793630/2483088
