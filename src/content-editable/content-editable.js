@@ -8,7 +8,6 @@ ContentEditable.prototype.call = function() {
 
 ContentEditable.prototype.extend = function(name, callback) {
 	this.commands[name] = callback;
-	console.log(this.commands);
 }
 
 module.exports = new ContentEditable;
