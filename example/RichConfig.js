@@ -2,12 +2,8 @@ Rich = window.Rich || {};
 
 Rich.config = {
 	toolbars: {
-		default: ["bold"]
+		default: ["bold", "italic"]
 	}
 }
-
-window.Rich.toolbar.extend('bold', function() {
-	window.Rich.contenteditable.call('bold');
-}, ["octicon", "octicon-globe"]);
 
 window.Rich.editor.init();

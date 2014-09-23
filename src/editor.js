@@ -38,19 +38,21 @@ editor.prototype.createDiv = function(appender) {
 }
 
 editor.prototype.attachListener = function(area) {
-    area.nextSibling.addEventListener('keyup', this.updateOriginalElement);
-}
-
-editor.prototype.updateOriginalElement = function(e) {
-    var rich = e.currentTarget;
-    var textarea = rich.previousSibling.previousSibling;
-
-    textarea.innerHTML = rich.innerHTML;
+    var self = this;
+    area.nextSibling.addEventListener('keyup', function(e) {
+        self.sync(e.currentTarget);
+    });
 }
 
 // Adapted from http://stackoverflow.com/a/4793630/2483088
 editor.prototype.insertAfter = function(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+editor.prototype.sync = function(area) {
+    var original = area.previousSibling.previousSibling;
+
+    original.innerHTML = area.innerHTML;
 }
 
 module.exports = new editor;
