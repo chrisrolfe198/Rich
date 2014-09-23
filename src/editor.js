@@ -10,6 +10,12 @@ editor.prototype.init = function() {
         this.config = new config;
         this.initialised = true;
 
+        if (this.config.input && this.config.input in ["alert", "html"]) {
+            this.input = this.config.input;
+        } else {
+            this.input = require("./input/alert.js");
+        }
+
         for (i = 0; i < this.areas.length; i++) {
             this.initialise(this.areas[i]);
         }

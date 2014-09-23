@@ -2,7 +2,7 @@ Rich = window.Rich || {};
 
 Rich.config = {
 	toolbars: {
-		default: ["bold", "italic"]
+		default: ["bold", "italic", "background-colour"]
 	}
 }
 

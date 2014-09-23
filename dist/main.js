@@ -12,14 +12,7 @@ config.prototype.getToolbar = function(name) {
 }
 
 module.exports = config;
-},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/commands/bold.js":[function(require,module,exports){
-var editable = require('../content-editable.js');
-
-editable.extend('bold', function() {
-	document.execCommand('bold');
-});
-
-},{"../content-editable.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js":[function(require,module,exports){
+},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js":[function(require,module,exports){
 function ContentEditable() {
 	this.commands = [];
 }
@@ -42,9 +35,8 @@ ContentEditable.prototype.extend = function(name, callback) {
 module.exports = new ContentEditable;
 
 },{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/loader.js":[function(require,module,exports){
-require('./commands/bold.js');
 
-},{"./commands/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/commands/bold.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js":[function(require,module,exports){
+},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js":[function(require,module,exports){
 var config = require('./config.js');
 
 function editor() {
@@ -56,6 +48,12 @@ editor.prototype.init = function() {
     if (!this.initialised) {
         this.config = new config;
         this.initialised = true;
+
+        if (this.config.input && this.config.input in ["alert", "html"]) {
+            this.input = this.config.input;
+        } else {
+            this.input = require("./input/alert.js");
+        }
 
         for (i = 0; i < this.areas.length; i++) {
             this.initialise(this.areas[i]);
@@ -109,18 +107,39 @@ editor.prototype.sync = function(area) {
 
 module.exports = new editor;
 
-},{"./config.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/config.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/main.js":[function(require,module,exports){
+},{"./config.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/config.js","./input/alert.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/input/alert.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/input/alert.js":[function(require,module,exports){
+function alertInput() {
+}
+
+alertInput.prototype.show = function(question) {
+    this.response = prompt(question);
+}
+
+alertInput.prototype.get = function() {
+    return this.response;
+}
+
+module.exports = new alertInput;
+
+},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/main.js":[function(require,module,exports){
 var contentEditable = require('./content-editable/content-editable.js');
 var contenteditableLoader = require('./content-editable/loader.js');
 var toolbar = require('./toolbar/toolbar.js');
-var toolbarLoader = require('./toolbar/loader.js')
+var toolbarLoader = require('./toolbar/loader.js');
 
 window.Rich = window.Rich || {};
 window.Rich.contenteditable = contentEditable;
 window.Rich.toolbar = toolbar;
 window.Rich.editor = require('./editor.js');
 
-},{"./content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js","./content-editable/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/loader.js","./editor.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js","./toolbar/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js","./toolbar/toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js":[function(require,module,exports){
+},{"./content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js","./content-editable/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/loader.js","./editor.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js","./toolbar/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js","./toolbar/toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/background-colour.js":[function(require,module,exports){
+var toolbar = require('../toolbar.js');
+
+toolbar.extend('background-colour', function(color) {
+    window.Rich.contenteditable.call('backColor', null, color);
+}, ["glyphicon", "glyphicon-bold"], true);
+
+},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js":[function(require,module,exports){
 var toolbar = require('../toolbar.js');
 
 toolbar.extend('bold', function() {
@@ -137,8 +156,9 @@ toolbar.extend('italic', function() {
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js":[function(require,module,exports){
 require('./items/bold.js');
 require('./items/italic.js');
+require('./items/background-colour.js');
 
-},{"./items/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js","./items/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
+},{"./items/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/background-colour.js","./items/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js","./items/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
 var contenteditable = require('../content-editable/content-editable.js');
 
 function toolbar() {
@@ -153,18 +173,24 @@ toolbar.prototype.call = function(name) {
     }
 }
 
-toolbar.prototype.extend = function(name, callback, classes) {
+toolbar.prototype.extend = function(name, callback, classes, input) {
 	classes.push('rich-toolbar-item');
+    if (input == undefined) {
+        input = false;
+    }
 	this.items[name] = {
 		callback: callback,
-		classes: classes
+		classes: classes,
+        input: input
 	};
 }
 
 toolbar.prototype.generate = function(name) {
+    console.log(this.items);
 	if (this.items[name] == undefined) { throw "Toolbar item not found"; }
 	var item = document.createElement('div');
     item.dataset.itemName = name;
+    item.dataset.input = this.items[name].input;
 
 	this.items[name].classes.forEach(function(className, index) {
 		item.classList.add(className);
@@ -193,6 +219,12 @@ toolbar.prototype.createToolbar = function(items) {
 toolbar.prototype.handleToolbarItemClick = function(e) {
     e.preventDefault();
     var name = e.currentTarget.dataset.itemName;
+
+    if (e.currentTarget.dataset.input) {
+        window.Rich.editor.input.show("Please enter a value for "+name);
+        var value = window.Rich.editor.input.get();
+        return Rich.toolbar.items[name].callback(value);
+    }
     Rich.toolbar.items[name].callback();
     window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
 }

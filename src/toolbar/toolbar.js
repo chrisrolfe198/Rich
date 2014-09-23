@@ -12,18 +12,24 @@ toolbar.prototype.call = function(name) {
     }
 }
 
-toolbar.prototype.extend = function(name, callback, classes) {
+toolbar.prototype.extend = function(name, callback, classes, input) {
 	classes.push('rich-toolbar-item');
+    if (input == undefined) {
+        input = false;
+    }
 	this.items[name] = {
 		callback: callback,
-		classes: classes
+		classes: classes,
+        input: input
 	};
 }
 
 toolbar.prototype.generate = function(name) {
+    console.log(this.items);
 	if (this.items[name] == undefined) { throw "Toolbar item not found"; }
 	var item = document.createElement('div');
     item.dataset.itemName = name;
+    item.dataset.input = this.items[name].input;
 
 	this.items[name].classes.forEach(function(className, index) {
 		item.classList.add(className);
@@ -52,6 +58,12 @@ toolbar.prototype.createToolbar = function(items) {
 toolbar.prototype.handleToolbarItemClick = function(e) {
     e.preventDefault();
     var name = e.currentTarget.dataset.itemName;
+
+    if (e.currentTarget.dataset.input) {
+        window.Rich.editor.input.show("Please enter a value for "+name);
+        var value = window.Rich.editor.input.get();
+        return Rich.toolbar.items[name].callback(value);
+    }
     Rich.toolbar.items[name].callback();
     window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
 }
