@@ -81,6 +81,11 @@ editor.prototype.createDiv = function(appender) {
 
     div.setAttribute('contenteditable', true);
 
+    var br = document.createElement('br');
+    var para = document.createElement('p');
+    para.appendChild(br);
+    div.appendChild(para);
+
     this.insertAfter(div, appender);
 }
 
