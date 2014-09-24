@@ -251,9 +251,10 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
     if (e.currentTarget.dataset.input == "true") {
         window.Rich.editor.input.show("Please enter a value for "+name);
         var value = window.Rich.editor.input.get();
-        return Rich.toolbar.items[name].callback(value);
+        Rich.toolbar.items[name].callback(value);
+    } else {
+        Rich.toolbar.items[name].callback();
     }
-    Rich.toolbar.items[name].callback();
     window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
 }
 
