@@ -1,7 +1,6 @@
 var config = require('./config.js');
 
 function editor() {
-    // Load up the rich text areas
     this.areas = document.querySelectorAll('.rich');
 }
 

@@ -30,8 +30,12 @@ toolbar.prototype.generate = function(name) {
     item.dataset.itemName = name;
     item.dataset.input = this.items[name].input;
 
-	this.items[name].classes.forEach(function(className, index) {
-		item.classList.add(className);
+    var classes = window.Rich.config.getClasses().concat(this.items[name].classes);
+
+	classes.forEach(function(className, index) {
+        if (!item.classList.contains(className)) {
+	          item.classList.add(className);
+          }
 	});
 
     item.addEventListener('mousedown', this.handleToolbarItemClick);

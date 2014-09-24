@@ -10,4 +10,8 @@ config.prototype.getToolbar = function(name) {
 	return this.config.toolbars[name];
 }
 
+config.prototype.getClasses = function() {
+	return this.config.classes;
+}
+
 module.exports = config;
