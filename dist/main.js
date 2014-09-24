@@ -136,7 +136,6 @@ window.Rich.editor = require('./editor.js');
 var toolbar = require('../toolbar.js');
 
 toolbar.extend('background-colour', function(color) {
-    console.log('Colour is: ');
     window.Rich.contenteditable.call('backColor', color);
 }, ["glyphicon", "glyphicon-bold"], true);
 
@@ -147,6 +146,13 @@ toolbar.extend('bold', function() {
     window.Rich.contenteditable.call('bold');
 }, ["glyphicon", "glyphicon-bold"]);
 
+},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/copy.js":[function(require,module,exports){
+var toolbar = require('../toolbar.js');
+
+toolbar.extend('copy', function() {
+    window.Rich.contenteditable.call('copy');
+}, ["glyphicon", "glyphicon-share"]);
+
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js":[function(require,module,exports){
 var toolbar = require('../toolbar.js');
 
@@ -154,12 +160,34 @@ toolbar.extend('italic', function() {
     window.Rich.contenteditable.call('italic');
 }, ["glyphicon", "glyphicon-italic"]);
 
+},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/link.js":[function(require,module,exports){
+var toolbar = require('../toolbar.js');
+
+toolbar.extend('link', function(url) {
+
+    if (!containsHttpOrHttps(url)) {
+        url = "http://" + url;
+    }
+
+    window.Rich.contenteditable.call('createLink', url);
+}, ["glyphicon", "glyphicon-link"], true);
+
+function containsHttpOrHttps(str) {
+    var tarea = str;
+    if (tarea.indexOf("http://")==0 && tarea.indexOf("https://")==0) {
+        return true;
+    }
+    return false;
+}
+
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js":[function(require,module,exports){
 require('./items/bold.js');
 require('./items/italic.js');
 require('./items/background-colour.js');
+require('./items/copy.js');
+require('./items/link.js');
 
-},{"./items/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/background-colour.js","./items/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js","./items/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
+},{"./items/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/background-colour.js","./items/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js","./items/copy.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/copy.js","./items/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js","./items/link.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/link.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
 var contenteditable = require('../content-editable/content-editable.js');
 
 function toolbar() {
@@ -187,7 +215,6 @@ toolbar.prototype.extend = function(name, callback, classes, input) {
 }
 
 toolbar.prototype.generate = function(name) {
-    console.log(this.items);
 	if (this.items[name] == undefined) { throw "Toolbar item not found"; }
 	var item = document.createElement('div');
     item.dataset.itemName = name;
@@ -221,16 +248,12 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
     e.preventDefault();
     var name = e.currentTarget.dataset.itemName;
 
-    console.log('input: ');
-    console.log(e.currentTarget.dataset.input);
-
     if (e.currentTarget.dataset.input == "true") {
-        console.log('Let me grab that input for you');
         window.Rich.editor.input.show("Please enter a value for "+name);
         var value = window.Rich.editor.input.get();
         return Rich.toolbar.items[name].callback(value);
     }
-    // Rich.toolbar.items[name].callback();
+    Rich.toolbar.items[name].callback();
     window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
 }
 
