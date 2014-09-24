@@ -59,12 +59,16 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
     e.preventDefault();
     var name = e.currentTarget.dataset.itemName;
 
-    if (e.currentTarget.dataset.input) {
+    console.log('input: ');
+    console.log(e.currentTarget.dataset.input);
+
+    if (e.currentTarget.dataset.input == "true") {
+        console.log('Let me grab that input for you');
         window.Rich.editor.input.show("Please enter a value for "+name);
         var value = window.Rich.editor.input.get();
         return Rich.toolbar.items[name].callback(value);
     }
-    Rich.toolbar.items[name].callback();
+    // Rich.toolbar.items[name].callback();
     window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
 }
 

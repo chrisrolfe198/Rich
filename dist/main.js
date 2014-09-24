@@ -17,11 +17,11 @@ function ContentEditable() {
 	this.commands = [];
 }
 
-ContentEditable.prototype.call = function(name) {
+ContentEditable.prototype.call = function(name, args) {
 	if (name in this.commands) {
 		this.commands[name]();
 	} else {
-		if (document.execCommand(name)) {
+		if (document.execCommand(name, null, args)) {
 			return true;
 		}
 		throw "The content editable command "+name+" doesn't exist";
@@ -136,7 +136,8 @@ window.Rich.editor = require('./editor.js');
 var toolbar = require('../toolbar.js');
 
 toolbar.extend('background-colour', function(color) {
-    window.Rich.contenteditable.call('backColor', null, color);
+    console.log('Colour is: ');
+    window.Rich.contenteditable.call('backColor', color);
 }, ["glyphicon", "glyphicon-bold"], true);
 
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js":[function(require,module,exports){
@@ -220,12 +221,16 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
     e.preventDefault();
     var name = e.currentTarget.dataset.itemName;
 
-    if (e.currentTarget.dataset.input) {
+    console.log('input: ');
+    console.log(e.currentTarget.dataset.input);
+
+    if (e.currentTarget.dataset.input == "true") {
+        console.log('Let me grab that input for you');
         window.Rich.editor.input.show("Please enter a value for "+name);
         var value = window.Rich.editor.input.get();
         return Rich.toolbar.items[name].callback(value);
     }
-    Rich.toolbar.items[name].callback();
+    // Rich.toolbar.items[name].callback();
     window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
 }
 

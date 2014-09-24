@@ -2,11 +2,11 @@ function ContentEditable() {
 	this.commands = [];
 }
 
-ContentEditable.prototype.call = function(name) {
+ContentEditable.prototype.call = function(name, args) {
 	if (name in this.commands) {
 		this.commands[name]();
 	} else {
-		if (document.execCommand(name)) {
+		if (document.execCommand(name, null, args)) {
 			return true;
 		}
 		throw "The content editable command "+name+" doesn't exist";
