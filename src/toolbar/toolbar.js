@@ -30,7 +30,7 @@ toolbar.prototype.generate = function(name) {
     item.dataset.itemName = name;
     item.dataset.input = this.items[name].input;
 
-    var classes = window.Rich.config.getClasses().concat(this.items[name].classes);
+    var classes = window.Rich.config.classes.concat(this.items[name].classes);
 
 	classes.forEach(function(className, index) {
         if (!item.classList.contains(className)) {

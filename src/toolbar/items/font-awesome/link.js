@@ -1,4 +1,4 @@
-var toolbar = require('../toolbar.js');
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('link', function(url) {
 
@@ -7,7 +7,7 @@ toolbar.extend('link', function(url) {
     }
 
     window.Rich.contenteditable.call('createLink', url);
-}, ["btn", "btn-default", "glyphicon", "glyphicon-link"], true);
+}, ["fa-link"], true);
 
 function containsHttpOrHttps(str) {
     var tarea = str;

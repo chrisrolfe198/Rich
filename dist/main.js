@@ -11,7 +11,12 @@ config.prototype.getToolbar = function(name) {
 	return this.config.toolbars[name];
 }
 
+config.prototype.getClasses = function() {
+	return this.config.classes;
+}
+
 module.exports = config;
+
 },{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js":[function(require,module,exports){
 function ContentEditable() {
 	this.commands = [];
@@ -40,7 +45,6 @@ module.exports = new ContentEditable;
 var config = require('./config.js');
 
 function editor() {
-    // Load up the rich text areas
     this.areas = document.querySelectorAll('.rich');
 }
 
@@ -132,22 +136,29 @@ window.Rich.contenteditable = contentEditable;
 window.Rich.toolbar = toolbar;
 window.Rich.editor = require('./editor.js');
 
-},{"./content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js","./content-editable/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/loader.js","./editor.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js","./toolbar/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js","./toolbar/toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/background-colour.js":[function(require,module,exports){
-var toolbar = require('../toolbar.js');
+},{"./content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js","./content-editable/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/loader.js","./editor.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js","./toolbar/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js","./toolbar/toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/fa-loader.js":[function(require,module,exports){
+require('./items/font-awesome/bold.js');
+require('./items/font-awesome/italic.js');
+require('./items/font-awesome/background-colour.js');
+require('./items/font-awesome/copy.js');
+require('./items/font-awesome/link.js');
+
+},{"./items/font-awesome/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js","./items/font-awesome/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/bold.js","./items/font-awesome/copy.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/copy.js","./items/font-awesome/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/italic.js","./items/font-awesome/link.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/link.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('background-colour', function(color) {
     window.Rich.contenteditable.call('backColor', color);
-}, ["btn", "btn-default", "glyphicon", "glyphicon-bold"], true);
+}, ["fa-link"], true);
 
-},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js":[function(require,module,exports){
-var toolbar = require('../toolbar.js');
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/bold.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('bold', function() {
     window.Rich.contenteditable.call('bold');
-}, ["btn", "btn-default", "glyphicon", "glyphicon-bold"]);
+}, ["fa-bold"]);
 
-},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/copy.js":[function(require,module,exports){
-var toolbar = require('../toolbar.js');
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/copy.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('copy', function() {
     try {
@@ -155,17 +166,17 @@ toolbar.extend('copy', function() {
     } catch (err) {
         alert('You need to enable browser copying to use this feature');
     }
-}, ["btn", "btn-default", "glyphicon", "glyphicon-share"]);
+}, ["fa-copy"]);
 
-},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js":[function(require,module,exports){
-var toolbar = require('../toolbar.js');
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/italic.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('italic', function() {
     window.Rich.contenteditable.call('italic');
-}, ["btn", "btn-default", "glyphicon", "glyphicon-italic"]);
+}, ["fa-italic"]);
 
-},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/link.js":[function(require,module,exports){
-var toolbar = require('../toolbar.js');
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/link.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('link', function(url) {
 
@@ -174,7 +185,7 @@ toolbar.extend('link', function(url) {
     }
 
     window.Rich.contenteditable.call('createLink', url);
-}, ["btn", "btn-default", "glyphicon", "glyphicon-link"], true);
+}, ["fa-link"], true);
 
 function containsHttpOrHttps(str) {
     var tarea = str;
@@ -186,14 +197,10 @@ function containsHttpOrHttps(str) {
     return false;
 }
 
-},{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js":[function(require,module,exports){
-require('./items/bold.js');
-require('./items/italic.js');
-require('./items/background-colour.js');
-require('./items/copy.js');
-require('./items/link.js');
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js":[function(require,module,exports){
+require('./fa-loader.js');
 
-},{"./items/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/background-colour.js","./items/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js","./items/copy.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/copy.js","./items/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js","./items/link.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/link.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
+},{"./fa-loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/fa-loader.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
 var contenteditable = require('../content-editable/content-editable.js');
 
 function toolbar() {
@@ -226,8 +233,12 @@ toolbar.prototype.generate = function(name) {
     item.dataset.itemName = name;
     item.dataset.input = this.items[name].input;
 
-	this.items[name].classes.forEach(function(className, index) {
-		item.classList.add(className);
+    var classes = window.Rich.config.classes.concat(this.items[name].classes);
+
+	classes.forEach(function(className, index) {
+        if (!item.classList.contains(className)) {
+	          item.classList.add(className);
+          }
 	});
 
     item.addEventListener('mousedown', this.handleToolbarItemClick);

@@ -1,4 +1,4 @@
-var toolbar = require('../toolbar.js');
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('link', function(url) {
 

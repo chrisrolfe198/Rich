@@ -1,4 +1,4 @@
-var toolbar = require('../toolbar.js');
+var toolbar = require('../../toolbar.js');
 
 toolbar.extend('copy', function() {
     try {
@@ -6,4 +6,4 @@ toolbar.extend('copy', function() {
     } catch (err) {
         alert('You need to enable browser copying to use this feature');
     }
-}, ["btn", "btn-default", "glyphicon", "glyphicon-share"]);
+}, ["fa-copy"]);
