@@ -25,7 +25,6 @@ toolbar.prototype.extend = function(name, callback, classes, input) {
 }
 
 toolbar.prototype.generate = function(name) {
-    console.log(this.items);
 	if (this.items[name] == undefined) { throw "Toolbar item not found"; }
 	var item = document.createElement('div');
     item.dataset.itemName = name;
@@ -59,11 +58,7 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
     e.preventDefault();
     var name = e.currentTarget.dataset.itemName;
 
-    console.log('input: ');
-    console.log(e.currentTarget.dataset.input);
-
     if (e.currentTarget.dataset.input == "true") {
-        console.log('Let me grab that input for you');
         window.Rich.editor.input.show("Please enter a value for "+name);
         var value = window.Rich.editor.input.get();
         return Rich.toolbar.items[name].callback(value);
