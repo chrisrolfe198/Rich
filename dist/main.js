@@ -137,28 +137,32 @@ var toolbar = require('../toolbar.js');
 
 toolbar.extend('background-colour', function(color) {
     window.Rich.contenteditable.call('backColor', color);
-}, ["glyphicon", "glyphicon-bold"], true);
+}, ["btn", "btn-default", "glyphicon", "glyphicon-bold"], true);
 
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/bold.js":[function(require,module,exports){
 var toolbar = require('../toolbar.js');
 
 toolbar.extend('bold', function() {
     window.Rich.contenteditable.call('bold');
-}, ["glyphicon", "glyphicon-bold"]);
+}, ["btn", "btn-default", "glyphicon", "glyphicon-bold"]);
 
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/copy.js":[function(require,module,exports){
 var toolbar = require('../toolbar.js');
 
 toolbar.extend('copy', function() {
-    window.Rich.contenteditable.call('copy');
-}, ["glyphicon", "glyphicon-share"]);
+    try {
+        window.Rich.contenteditable.call('copy');
+    } catch (err) {
+        alert('You need to enable browser copying to use this feature');
+    }
+}, ["btn", "btn-default", "glyphicon", "glyphicon-share"]);
 
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/italic.js":[function(require,module,exports){
 var toolbar = require('../toolbar.js');
 
 toolbar.extend('italic', function() {
     window.Rich.contenteditable.call('italic');
-}, ["glyphicon", "glyphicon-italic"]);
+}, ["btn", "btn-default", "glyphicon", "glyphicon-italic"]);
 
 },{"../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/link.js":[function(require,module,exports){
 var toolbar = require('../toolbar.js');
@@ -170,11 +174,13 @@ toolbar.extend('link', function(url) {
     }
 
     window.Rich.contenteditable.call('createLink', url);
-}, ["glyphicon", "glyphicon-link"], true);
+}, ["btn", "btn-default", "glyphicon", "glyphicon-link"], true);
 
 function containsHttpOrHttps(str) {
     var tarea = str;
     if (tarea.indexOf("http://")==0 && tarea.indexOf("https://")==0) {
+        return true;
+    } else if (tarea[0] == '/') {
         return true;
     }
     return false;

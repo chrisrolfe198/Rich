@@ -1,0 +1,14 @@
+.rich {
+    display: none;
+}
+
+.rich-toolbar-item {
+    margin-right: 1px;
+}
+
+.rich-textarea {
+    margin-top: 5px;
+    outline: none;
+    border: solid #ccc 1px;
+    padding: 2px;
+}

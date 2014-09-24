@@ -2,4 +2,4 @@ var toolbar = require('../toolbar.js');
 
 toolbar.extend('italic', function() {
     window.Rich.contenteditable.call('italic');
-}, ["glyphicon", "glyphicon-italic"]);
+}, ["btn", "btn-default", "glyphicon", "glyphicon-italic"]);

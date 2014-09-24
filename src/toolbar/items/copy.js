@@ -1,5 +1,9 @@
 var toolbar = require('../toolbar.js');
 
 toolbar.extend('copy', function() {
-    window.Rich.contenteditable.call('copy');
-}, ["glyphicon", "glyphicon-share"]);
+    try {
+        window.Rich.contenteditable.call('copy');
+    } catch (err) {
+        alert('You need to enable browser copying to use this feature');
+    }
+}, ["btn", "btn-default", "glyphicon", "glyphicon-share"]);
