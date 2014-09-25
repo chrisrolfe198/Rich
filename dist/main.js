@@ -72,7 +72,7 @@ editor.prototype.initialise = function(area) {
 }
 
 editor.prototype.createToolbar = function(area) {
-    var toolbarName = area.dataset.toolbar;
+    var toolbarName = area.getAttribute('data-toolbar');
     var toolbar = window.Rich.toolbar.createToolbar(this.config.getToolbar(toolbarName));
     this.insertAfter(toolbar, area);
 }
@@ -230,8 +230,8 @@ toolbar.prototype.extend = function(name, callback, classes, input) {
 toolbar.prototype.generate = function(name) {
 	if (this.items[name] == undefined) { throw "Toolbar item not found"; }
 	var item = document.createElement('div');
-    item.dataset.itemName = name;
-    item.dataset.input = this.items[name].input;
+    item.setAttribute('data-item-name', name);
+    item.setAttribute('data-input', this.items[name].input);
 
     var classes = window.Rich.config.classes.concat(this.items[name].classes);
 
@@ -276,9 +276,9 @@ toolbar.prototype.createToolbar = function(items) {
 
 toolbar.prototype.handleToolbarItemClick = function(e) {
     e.preventDefault();
-    var name = e.currentTarget.dataset.itemName;
+    var name = e.currentTarget.getAttribute('data-item-name');
 
-    if (e.currentTarget.dataset.input == "true") {
+    if (e.currentTarget.getAttribute('data-input') == "true") {
         window.Rich.editor.input.show("Please enter a value for "+name);
         var value = window.Rich.editor.input.get();
         Rich.toolbar.items[name].callback(value);

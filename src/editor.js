@@ -28,7 +28,7 @@ editor.prototype.initialise = function(area) {
 }
 
 editor.prototype.createToolbar = function(area) {
-    var toolbarName = area.dataset.toolbar;
+    var toolbarName = area.getAttribute('data-toolbar');
     var toolbar = window.Rich.toolbar.createToolbar(this.config.getToolbar(toolbarName));
     this.insertAfter(toolbar, area);
 }
