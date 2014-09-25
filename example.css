@@ -2,6 +2,15 @@
     display: none;
 }
 
+.rich-toolbar-group {
+    margin: 0 5px;
+    display: inline-block;
+}
+
+.rich-toolbar-group:first-of-type {
+    margin-left: 0;
+}
+
 .rich-toolbar-item {
     margin-right: 1px;
 }
