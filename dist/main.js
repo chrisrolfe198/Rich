@@ -174,7 +174,7 @@ var toolbar = require('../../toolbar.js');
 
 toolbar.extend('bold', function() {
     window.Rich.contenteditable.call('bold');
-}, [], 'bold');
+}, ["fa-bold"], 'bold');
 
 },{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/colour.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
