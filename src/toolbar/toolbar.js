@@ -33,6 +33,7 @@ toolbar.prototype.generate = function(name) {
     if (!this.items[name].classes.length) {
         var classes = window.Rich.config.classes;
         item.innerHTML = this.items[name].text;
+        item.classList.add('rich-toolbar-item');
     } else {
         var classes = window.Rich.config.classes.concat(this.items[name].classes).concat(['rich-toolbar-item']);
         item.setAttribute('title', this.items[name].text);

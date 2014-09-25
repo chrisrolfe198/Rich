@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/chris/Public/Web/autovhosts/projects/Rich/src/config.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/config.js":[function(require,module,exports){
 function config() {
 	if (!window.Rich || !window.Rich.config) { throw "No configuration found for Rich" }
 	this.config = window.Rich.config;
@@ -17,7 +17,7 @@ config.prototype.getClasses = function() {
 
 module.exports = config;
 
-},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js":[function(require,module,exports){
+},{}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/content-editable/content-editable.js":[function(require,module,exports){
 function ContentEditable() {
 	this.commands = [];
 }
@@ -39,9 +39,9 @@ ContentEditable.prototype.extend = function(name, callback) {
 
 module.exports = new ContentEditable;
 
-},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/loader.js":[function(require,module,exports){
+},{}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/content-editable/loader.js":[function(require,module,exports){
 
-},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js":[function(require,module,exports){
+},{}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/editor.js":[function(require,module,exports){
 var config = require('./config.js');
 
 function editor() {
@@ -111,7 +111,7 @@ editor.prototype.sync = function(area) {
 
 module.exports = new editor;
 
-},{"./config.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/config.js","./input/alert.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/input/alert.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/input/alert.js":[function(require,module,exports){
+},{"./config.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/config.js","./input/alert.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/input/alert.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/input/alert.js":[function(require,module,exports){
 function alertInput() {
 }
 
@@ -125,7 +125,7 @@ alertInput.prototype.get = function() {
 
 module.exports = new alertInput;
 
-},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/main.js":[function(require,module,exports){
+},{}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/main.js":[function(require,module,exports){
 if ("document" in self && !("classList" in document.createElement("_"))) {
     require('./polyfills/classlist.min.js')
 }
@@ -140,11 +140,11 @@ window.Rich.contenteditable = contentEditable;
 window.Rich.toolbar = toolbar;
 window.Rich.editor = require('./editor.js');
 
-},{"./content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js","./content-editable/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/loader.js","./editor.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/editor.js","./polyfills/classlist.min.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/polyfills/classlist.min.js","./toolbar/loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js","./toolbar/toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/polyfills/classlist.min.js":[function(require,module,exports){
+},{"./content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/content-editable/content-editable.js","./content-editable/loader.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/content-editable/loader.js","./editor.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/editor.js","./polyfills/classlist.min.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/polyfills/classlist.min.js","./toolbar/loader.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/loader.js","./toolbar/toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/polyfills/classlist.min.js":[function(require,module,exports){
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/
 ;if("document" in self&&!("classList" in document.createElement("_"))){(function(j){"use strict";if(!("Element" in j)){return}var a="classList",f="prototype",m=j.Element[f],b=Object,k=String[f].trim||function(){return this.replace(/^\s+|\s+$/g,"")},c=Array[f].indexOf||function(q){var p=0,o=this.length;for(;p<o;p++){if(p in this&&this[p]===q){return p}}return -1},n=function(o,p){this.name=o;this.code=DOMException[o];this.message=p},g=function(p,o){if(o===""){throw new n("SYNTAX_ERR","An invalid or illegal string was specified")}if(/\s/.test(o)){throw new n("INVALID_CHARACTER_ERR","String contains an invalid character")}return c.call(p,o)},d=function(s){var r=k.call(s.getAttribute("class")||""),q=r?r.split(/\s+/):[],p=0,o=q.length;for(;p<o;p++){this.push(q[p])}this._updateClassName=function(){s.setAttribute("class",this.toString())}},e=d[f]=[],i=function(){return new d(this)};n[f]=Error[f];e.item=function(o){return this[o]||null};e.contains=function(o){o+="";return g(this,o)!==-1};e.add=function(){var s=arguments,r=0,p=s.length,q,o=false;do{q=s[r]+"";if(g(this,q)===-1){this.push(q);o=true}}while(++r<p);if(o){this._updateClassName()}};e.remove=function(){var t=arguments,s=0,p=t.length,r,o=false;do{r=t[s]+"";var q=g(this,r);if(q!==-1){this.splice(q,1);o=true}}while(++s<p);if(o){this._updateClassName()}};e.toggle=function(p,q){p+="";var o=this.contains(p),r=o?q!==true&&"remove":q!==false&&"add";if(r){this[r](p)}return !o};e.toString=function(){return this.join(" ")};if(b.defineProperty){var l={get:i,enumerable:true,configurable:true};try{b.defineProperty(m,a,l)}catch(h){if(h.number===-2146823252){l.enumerable=false;b.defineProperty(m,a,l)}}}else{if(b[f].__defineGetter__){m.__defineGetter__(a,i)}}}(self))};
 
-},{}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/fa-loader.js":[function(require,module,exports){
+},{}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/fa-loader.js":[function(require,module,exports){
 require('./items/font-awesome/bold.js');
 require('./items/font-awesome/italic.js');
 require('./items/font-awesome/background-colour.js');
@@ -162,28 +162,28 @@ require('./items/font-awesome/strikethrough.js');
 require('./items/font-awesome/underline.js');
 require('./items/font-awesome/unformat.js');
 
-},{"./items/font-awesome/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js","./items/font-awesome/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/bold.js","./items/font-awesome/colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/colour.js","./items/font-awesome/copy.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/copy.js","./items/font-awesome/cut.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/cut.js","./items/font-awesome/hr.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/hr.js","./items/font-awesome/image.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/image.js","./items/font-awesome/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/italic.js","./items/font-awesome/justify.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/justify.js","./items/font-awesome/link.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/link.js","./items/font-awesome/lists.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/lists.js","./items/font-awesome/redo.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/redo.js","./items/font-awesome/strikethrough.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/strikethrough.js","./items/font-awesome/underline.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/underline.js","./items/font-awesome/undo.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/undo.js","./items/font-awesome/unformat.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/unformat.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js":[function(require,module,exports){
+},{"./items/font-awesome/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/background-colour.js","./items/font-awesome/bold.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/bold.js","./items/font-awesome/colour.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/colour.js","./items/font-awesome/copy.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/copy.js","./items/font-awesome/cut.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/cut.js","./items/font-awesome/hr.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/hr.js","./items/font-awesome/image.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/image.js","./items/font-awesome/italic.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/italic.js","./items/font-awesome/justify.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/justify.js","./items/font-awesome/link.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/link.js","./items/font-awesome/lists.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/lists.js","./items/font-awesome/redo.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/redo.js","./items/font-awesome/strikethrough.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/strikethrough.js","./items/font-awesome/underline.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/underline.js","./items/font-awesome/undo.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/undo.js","./items/font-awesome/unformat.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/unformat.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/background-colour.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('background-colour', function(color) {
     window.Rich.contenteditable.call('backColor', color);
 }, [], 'Background Colour', true);
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/bold.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/bold.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('bold', function() {
     window.Rich.contenteditable.call('bold');
 }, ["fa-bold"], 'bold');
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/colour.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/colour.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('colour', function(colour) {
     window.Rich.contenteditable.call('foreColor', colour);
 }, [], "Colour", true);
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/copy.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/copy.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('copy', function() {
@@ -194,7 +194,7 @@ toolbar.extend('copy', function() {
     }
 }, ["fa-copy"], "Copy");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/cut.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/cut.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('cut', function() {
@@ -205,28 +205,28 @@ toolbar.extend('cut', function() {
     }
 }, ["fa-scissors"], "Cut");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/hr.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/hr.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('hr', function() {
     window.Rich.contenteditable.call('insertHorizontalRule');
 }, [], "HR");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/image.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/image.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('image', function(image) {
     window.Rich.contenteditable.call('insertImage', image);
 }, ["fa-file-image-o"], "Add Image", true);
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/italic.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/italic.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('italic', function() {
     window.Rich.contenteditable.call('italic');
 }, ["fa-italic"], "Italics");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/justify.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/justify.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('justify-center', function() {
@@ -245,7 +245,7 @@ toolbar.extend('justify-right', function() {
     window.Rich.contenteditable.call('justifyRight');
 }, ["fa-align-right"], "Align Text Right");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/link.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/link.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('link', function(url) {
@@ -271,7 +271,7 @@ function containsHttpOrHttps(str) {
     return false;
 }
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/lists.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/lists.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('ol', function() {
@@ -282,45 +282,45 @@ toolbar.extend('ul', function() {
     window.Rich.contenteditable.call('insertUnorderedList');
 }, ["fa-list-ul"], "Add Bullet List");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/redo.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/redo.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('redo', function() {
     window.Rich.contenteditable.call('redo');
 }, ["fa-repeat"], "Redo Changes");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/strikethrough.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/strikethrough.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('strikethrough', function() {
     window.Rich.contenteditable.call('strikeThrough');
 }, ["fa-strikethrough"], "Strike through text");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/underline.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/underline.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('underline', function() {
     window.Rich.contenteditable.call('underline');
 }, ["fa-underline"], "Underline text");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/undo.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/undo.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('undo', function() {
     window.Rich.contenteditable.call('undo');
 }, ["fa-undo"], "Undo Changes");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/unformat.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/items/font-awesome/unformat.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('unformat', function() {
     window.Rich.contenteditable.call('removeFormat');
 }, [], "Remove Styling");
 
-},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js":[function(require,module,exports){
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/loader.js":[function(require,module,exports){
 require('./fa-loader.js');
 
-},{"./fa-loader.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/fa-loader.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
+},{"./fa-loader.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/fa-loader.js"}],"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/toolbar/toolbar.js":[function(require,module,exports){
 var contenteditable = require('../content-editable/content-editable.js');
 
 function toolbar() {
@@ -356,6 +356,7 @@ toolbar.prototype.generate = function(name) {
     if (!this.items[name].classes.length) {
         var classes = window.Rich.config.classes;
         item.innerHTML = this.items[name].text;
+        item.classList.add('rich-toolbar-item');
     } else {
         var classes = window.Rich.config.classes.concat(this.items[name].classes).concat(['rich-toolbar-item']);
         item.setAttribute('title', this.items[name].text);
@@ -428,4 +429,4 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
 
 module.exports = new toolbar;
 
-},{"../content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/content-editable/content-editable.js"}]},{},["/home/chris/Public/Web/autovhosts/projects/Rich/src/main.js"]);
+},{"../content-editable/content-editable.js":"/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/content-editable/content-editable.js"}]},{},["/home/chris/Public/Web/autovhosts/projects/runescape-fansite/public/js/vendor/Rich/src/main.js"]);
