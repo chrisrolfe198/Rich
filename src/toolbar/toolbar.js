@@ -56,7 +56,7 @@ toolbar.prototype.createToolbar = function(items) {
 	toolbarHTML.classList.add('rich-toolbar');
 	toolbarHTML.innerHTML = '';
 
-    if (items instanceof Array) {
+    if (items[0] instanceof Array) {
         items.forEach(function(groupItems, index) {
             var groupContainer = document.createElement('div');
             groupContainer.classList.add('rich-toolbar-group');
