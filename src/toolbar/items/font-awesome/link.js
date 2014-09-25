@@ -7,7 +7,7 @@ toolbar.extend('link', function(url) {
     }
 
     window.Rich.contenteditable.call('createLink', url);
-}, ["fa-link"], true);
+}, ["fa-link"], "Link", true);
 
 function containsHttpOrHttps(str) {
     var tarea = str;

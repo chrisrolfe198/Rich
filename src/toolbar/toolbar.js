@@ -12,14 +12,14 @@ toolbar.prototype.call = function(name) {
     }
 }
 
-toolbar.prototype.extend = function(name, callback, classes, input) {
-	classes.push('rich-toolbar-item');
+toolbar.prototype.extend = function(name, callback, classes, text, input) {
     if (input == undefined) {
         input = false;
     }
 	this.items[name] = {
 		callback: callback,
 		classes: classes,
+        text: text,
         input: input
 	};
 }
@@ -30,7 +30,13 @@ toolbar.prototype.generate = function(name) {
     item.setAttribute('data-item-name', name);
     item.setAttribute('data-input', this.items[name].input);
 
-    var classes = window.Rich.config.classes.concat(this.items[name].classes);
+    if (!this.items[name].classes.length) {
+        var classes = window.Rich.config.classes;
+        item.innerHTML = this.items[name].text;
+    } else {
+        var classes = window.Rich.config.classes.concat(this.items[name].classes).concat(['rich-toolbar-item']);
+        item.setAttribute('title', this.items[name].text);
+    }
 
 	classes.forEach(function(className, index) {
         if (!item.classList.contains(className)) {
@@ -54,6 +60,11 @@ toolbar.prototype.createToolbar = function(items) {
         items.forEach(function(groupItems, index) {
             var groupContainer = document.createElement('div');
             groupContainer.classList.add('rich-toolbar-group');
+            var groupClasses = window.Rich.config.groupClasses
+
+            groupClasses.forEach(function(name, index) {
+                groupContainer.classList.add(name);
+            });
 
             groupItems.forEach(function(name, index) {
                 groupContainer.appendChild(self.generate(name));

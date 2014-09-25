@@ -15,6 +15,10 @@
     margin-right: 1px;
 }
 
+.btn-group .rich-toolbar-item {
+    margin: 0;
+}
+
 .rich-textarea {
     margin-top: 5px;
     outline: none;

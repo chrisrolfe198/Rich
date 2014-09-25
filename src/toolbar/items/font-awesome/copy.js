@@ -6,4 +6,4 @@ toolbar.extend('copy', function() {
     } catch (err) {
         alert('You need to enable browser copying to use this feature');
     }
-}, ["fa-copy"]);
+}, ["fa-copy"], "Copy");
