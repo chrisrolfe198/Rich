@@ -1,3 +1,7 @@
+if ("document" in self && !("classList" in document.createElement("_"))) {
+    require('./polyfills/classlist.min.js')
+}
+
 var contentEditable = require('./content-editable/content-editable.js');
 var contenteditableLoader = require('./content-editable/loader.js');
 var toolbar = require('./toolbar/toolbar.js');
