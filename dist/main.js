@@ -253,10 +253,23 @@ toolbar.prototype.createToolbar = function(items) {
 	toolbarHTML.classList.add('rich-toolbar');
 	toolbarHTML.innerHTML = '';
 
-	items.forEach(function(name, index) {
-		// Event listener for toolbar item
-		toolbarHTML.appendChild(self.generate(name));
-	});
+    if (items instanceof Array) {
+        items.forEach(function(groupItems, index) {
+            var groupContainer = document.createElement('div');
+            groupContainer.classList.add('rich-toolbar-group');
+
+            groupItems.forEach(function(name, index) {
+                groupContainer.appendChild(self.generate(name));
+            });
+
+            toolbarHTML.appendChild(groupContainer);
+        });
+    } else {
+    	items.forEach(function(name, index) {
+    		// Event listener for toolbar item
+    		toolbarHTML.appendChild(self.generate(name));
+    	});
+    }
 
 	return toolbarHTML;
 }
@@ -272,7 +285,14 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
     } else {
         Rich.toolbar.items[name].callback();
     }
-    window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
+
+    // Toolbar groups need to go up another level
+    if (e.currentTarget.parentElement.classList.contains('rich-toolbar-group')) {
+        window.Rich.editor.sync(e.currentTarget.parentElement.parentElement.nextSibling);
+    } else {
+        window.Rich.editor.sync(e.currentTarget.parentElement.nextSibling);
+    }
+
 }
 
 module.exports = new toolbar;
