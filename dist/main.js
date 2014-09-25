@@ -150,13 +150,24 @@ require('./items/font-awesome/italic.js');
 require('./items/font-awesome/background-colour.js');
 require('./items/font-awesome/copy.js');
 require('./items/font-awesome/link.js');
+require('./items/font-awesome/colour.js');
+require('./items/font-awesome/cut.js');
+require('./items/font-awesome/hr.js');
+require('./items/font-awesome/image.js');
+require('./items/font-awesome/justify.js');
+require('./items/font-awesome/lists.js');
+require('./items/font-awesome/redo.js');
+require('./items/font-awesome/undo.js');
+require('./items/font-awesome/strikethrough.js');
+require('./items/font-awesome/underline.js');
+require('./items/font-awesome/unformat.js');
 
-},{"./items/font-awesome/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js","./items/font-awesome/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/bold.js","./items/font-awesome/copy.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/copy.js","./items/font-awesome/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/italic.js","./items/font-awesome/link.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/link.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js":[function(require,module,exports){
+},{"./items/font-awesome/background-colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js","./items/font-awesome/bold.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/bold.js","./items/font-awesome/colour.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/colour.js","./items/font-awesome/copy.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/copy.js","./items/font-awesome/cut.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/cut.js","./items/font-awesome/hr.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/hr.js","./items/font-awesome/image.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/image.js","./items/font-awesome/italic.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/italic.js","./items/font-awesome/justify.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/justify.js","./items/font-awesome/link.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/link.js","./items/font-awesome/lists.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/lists.js","./items/font-awesome/redo.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/redo.js","./items/font-awesome/strikethrough.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/strikethrough.js","./items/font-awesome/underline.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/underline.js","./items/font-awesome/undo.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/undo.js","./items/font-awesome/unformat.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/unformat.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/background-colour.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('background-colour', function(color) {
     window.Rich.contenteditable.call('backColor', color);
-}, ["fa-link"], 'Background Colour', true);
+}, [], 'Background Colour', true);
 
 },{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/bold.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
@@ -164,6 +175,13 @@ var toolbar = require('../../toolbar.js');
 toolbar.extend('bold', function() {
     window.Rich.contenteditable.call('bold');
 }, [], 'bold');
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/colour.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('colour', function(colour) {
+    window.Rich.contenteditable.call('foreColor', colour);
+}, [], "Colour", true);
 
 },{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/copy.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
@@ -176,12 +194,56 @@ toolbar.extend('copy', function() {
     }
 }, ["fa-copy"], "Copy");
 
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/cut.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('cut', function() {
+    try {
+        window.Rich.contenteditable.call('cut');
+    } catch (err) {
+        alert('You need to enable browser cutting to use this feature');
+    }
+}, ["fa-scissors"], "Cut");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/hr.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('hr', function() {
+    window.Rich.contenteditable.call('insertHorizontalRule');
+}, [], "HR");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/image.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('image', function(image) {
+    window.Rich.contenteditable.call('insertImage', image);
+}, ["fa-file-image-o"], "Add Image", true);
+
 },{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/italic.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
 
 toolbar.extend('italic', function() {
     window.Rich.contenteditable.call('italic');
 }, ["fa-italic"], "Italics");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/justify.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('justify-center', function() {
+    window.Rich.contenteditable.call('justifyCenter');
+}, ["fa-align-center"], "Center Text");
+
+toolbar.extend('justify-full', function() {
+    window.Rich.contenteditable.call('justifyFull');
+}, ["fa-align-justify"], "Justify Text");
+
+toolbar.extend('justify-left', function() {
+    window.Rich.contenteditable.call('justifyLeft');
+}, ["fa-align-left"], "Align Text Left");
+
+toolbar.extend('justify-right', function() {
+    window.Rich.contenteditable.call('justifyRight');
+}, ["fa-align-right"], "Align Text Right");
 
 },{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/link.js":[function(require,module,exports){
 var toolbar = require('../../toolbar.js');
@@ -195,6 +257,10 @@ toolbar.extend('link', function(url) {
     window.Rich.contenteditable.call('createLink', url);
 }, ["fa-link"], "Link", true);
 
+toolbar.extend('unlink', function() {
+    window.Rich.contenteditable.call('unlink');
+}, ["fa-unlink"], "Unlink");
+
 function containsHttpOrHttps(str) {
     var tarea = str;
     if (tarea.indexOf("http://")==0 && tarea.indexOf("https://")==0) {
@@ -204,6 +270,52 @@ function containsHttpOrHttps(str) {
     }
     return false;
 }
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/lists.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('ol', function() {
+    window.Rich.contenteditable.call('insertOrderedList');
+}, ["fa-list-ol"], "Add Numbered List");
+
+toolbar.extend('ul', function() {
+    window.Rich.contenteditable.call('insertUnorderedList');
+}, ["fa-list-ul"], "Add Bullet List");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/redo.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('redo', function() {
+    window.Rich.contenteditable.call('redo');
+}, ["fa-repeat"], "Redo Changes");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/strikethrough.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('strikethrough', function() {
+    window.Rich.contenteditable.call('strikeThrough');
+}, ["fa-strikethrough"], "Strike through text");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/underline.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('underline', function() {
+    window.Rich.contenteditable.call('underline');
+}, ["fa-underline"], "Underline text");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/undo.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('undo', function() {
+    window.Rich.contenteditable.call('undo');
+}, ["fa-undo"], "Undo Changes");
+
+},{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/items/font-awesome/unformat.js":[function(require,module,exports){
+var toolbar = require('../../toolbar.js');
+
+toolbar.extend('unformat', function() {
+    window.Rich.contenteditable.call('removeFormat');
+}, [], "Remove Styling");
 
 },{"../../toolbar.js":"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/toolbar.js"}],"/home/chris/Public/Web/autovhosts/projects/Rich/src/toolbar/loader.js":[function(require,module,exports){
 require('./fa-loader.js');
@@ -236,7 +348,7 @@ toolbar.prototype.extend = function(name, callback, classes, text, input) {
 }
 
 toolbar.prototype.generate = function(name) {
-	if (this.items[name] == undefined) { throw "Toolbar item not found"; }
+	if (this.items[name] == undefined) { throw "Toolbar "+name+" not found"; }
 	var item = document.createElement('div');
     item.setAttribute('data-item-name', name);
     item.setAttribute('data-input', this.items[name].input);

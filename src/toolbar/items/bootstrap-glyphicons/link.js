@@ -7,7 +7,11 @@ toolbar.extend('link', function(url) {
     }
 
     window.Rich.contenteditable.call('createLink', url);
-}, ["glyphicon-link"], true);
+}, ["glyphicon-link"], "Link", true);
+
+toolbar.extend('unlink', function() {
+    window.Rich.contenteditable.call('unlink');
+}, [], "Unlink");
 
 function containsHttpOrHttps(str) {
     var tarea = str;

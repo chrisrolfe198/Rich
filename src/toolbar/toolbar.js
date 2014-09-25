@@ -25,7 +25,7 @@ toolbar.prototype.extend = function(name, callback, classes, text, input) {
 }
 
 toolbar.prototype.generate = function(name) {
-	if (this.items[name] == undefined) { throw "Toolbar item not found"; }
+	if (this.items[name] == undefined) { throw "Toolbar "+name+" not found"; }
 	var item = document.createElement('div');
     item.setAttribute('data-item-name', name);
     item.setAttribute('data-input', this.items[name].input);
