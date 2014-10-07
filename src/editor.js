@@ -39,10 +39,19 @@ editor.prototype.createDiv = function(appender) {
 
     div.setAttribute('contenteditable', true);
 
-    var br = document.createElement('br');
-    var para = document.createElement('p');
-    para.appendChild(br);
-    div.appendChild(para);
+    console.log(appender.innerHTML);
+
+    if (appender.innerHTML) {
+        appenderEntities = appender.innerHTML;
+        appenderHTML = appenderEntities.replace(/&lt;/g, '<');
+        appenderHTML = appenderHTML.replace(/&gt;/g, '>');
+        div.insertAdjacentHTML('afterbegin', appenderHTML);
+    } else {
+        var br = document.createElement('br');
+        var para = document.createElement('p');
+        para.appendChild(br);
+        div.appendChild(para);
+    }
 
     this.insertAfter(div, appender);
 }
