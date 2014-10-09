@@ -82,8 +82,11 @@ editor.prototype.createDiv = function(appender) {
     div.classList.add('rich-textarea');
 
     div.setAttribute('contenteditable', true);
+    var classes = appender.getAttribute('data-editor-classes').split(' ');
 
-    console.log(appender.innerHTML);
+    for(var i = 0; i < classes.length; i++) {
+        div.classList.add(classes[i]);
+    }
 
     if (appender.innerHTML) {
         appenderEntities = appender.innerHTML;
