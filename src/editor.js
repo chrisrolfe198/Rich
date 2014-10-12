@@ -38,10 +38,13 @@ editor.prototype.createDiv = function(appender) {
     div.classList.add('rich-textarea');
 
     div.setAttribute('contenteditable', true);
-    var classes = appender.getAttribute('data-editor-classes').split(' ');
 
-    for(var i = 0; i < classes.length; i++) {
-        div.classList.add(classes[i]);
+    if (appender.getAttribute('data-editor-classes')) {
+        var classes = appender.getAttribute('data-editor-classes').split(' ');
+
+        for(var i = 0; i < classes.length; i++) {
+            div.classList.add(classes[i]);
+        }
     }
 
     if (appender.innerHTML) {
