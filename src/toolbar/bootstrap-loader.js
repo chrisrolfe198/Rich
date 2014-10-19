@@ -1,0 +1,16 @@
+require('./items/bootstrap-glyphicons/bold.js');
+require('./items/bootstrap-glyphicons/italic.js');
+require('./items/bootstrap-glyphicons/background-colour.js');
+require('./items/bootstrap-glyphicons/copy.js');
+require('./items/bootstrap-glyphicons/link.js');
+require('./items/bootstrap-glyphicons/colour.js');
+require('./items/bootstrap-glyphicons/cut.js');
+require('./items/bootstrap-glyphicons/hr.js');
+require('./items/bootstrap-glyphicons/image.js');
+require('./items/bootstrap-glyphicons/justify.js');
+require('./items/bootstrap-glyphicons/lists.js');
+require('./items/bootstrap-glyphicons/redo.js');
+require('./items/bootstrap-glyphicons/undo.js');
+require('./items/bootstrap-glyphicons/strikethrough.js');
+require('./items/bootstrap-glyphicons/underline.js');
+require('./items/bootstrap-glyphicons/unformat.js');

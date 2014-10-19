@@ -1,0 +1,26 @@
+{
+  "name": "Rich",
+  "version": "2.0.0",
+  "homepage": "https://github.com/christopherrolfe198/Rich",
+  "authors": [
+    "Christopher Rolfe <christopher.rolfe198@gmail.com>"
+  ],
+  "description": "A Rich text editor built to be modular and lightweight",
+  "main": "dist/main.min.js",
+  "keywords": [
+    "content-editable",
+    "Rich",
+    "Editor"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+	"src",
+	"gulpfile.js",
+	"package.json"
+  ]
+}
