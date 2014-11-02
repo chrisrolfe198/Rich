@@ -1,12 +1,12 @@
-// Add items to the toolbar here
-var RichConfig = {
-	toolbar: "b,i,u,smiley,ul,link,background"
+Rich = window.Rich || {};
+
+Rich.config = {
+	toolbars: {
+		default: [["bold", "italic", "underline", "strikethrough", "hr"], ["link", "unlink", "image"], ["cut", "copy"], ["undo", "redo", "unformat"], ["background-colour", "colour"], ["justify-left", "justify-center", "justify-full", "justify-right"]],
+		foobar: ["bold", "italic"]
+	},
+	classes : ["btn", "btn-default", "fa"],
+	groupClasses: ["btn-group"]
 }
 
-// Create custom toolbar items
-var ToolbarItems = {
-	"smiley": {
-		"command": "insertImage",
-		"value": "http://bit.ly/1shQN2U"
-	}
-}
+window.Rich.editor.init();

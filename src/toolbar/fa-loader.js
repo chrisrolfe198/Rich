@@ -1,0 +1,16 @@
+require('./items/font-awesome/bold.js');
+require('./items/font-awesome/italic.js');
+require('./items/font-awesome/background-colour.js');
+require('./items/font-awesome/copy.js');
+require('./items/font-awesome/link.js');
+require('./items/font-awesome/colour.js');
+require('./items/font-awesome/cut.js');
+require('./items/font-awesome/hr.js');
+require('./items/font-awesome/image.js');
+require('./items/font-awesome/justify.js');
+require('./items/font-awesome/lists.js');
+require('./items/font-awesome/redo.js');
+require('./items/font-awesome/undo.js');
+require('./items/font-awesome/strikethrough.js');
+require('./items/font-awesome/underline.js');
+require('./items/font-awesome/unformat.js');

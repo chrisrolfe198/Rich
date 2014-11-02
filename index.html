@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="example.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 <body>
 	<div class="container">
-		<h1>
-			Rich <small>- The easy to use rich text editor built on content editable</small>
-		</h1>
-		<p>
-			<strong>What is content editable?</strong>
-			Content editable is an attribute that lets you manipulate the text on elements like you would a text area. With the execCommand function you are opened to a wide range of native support for rich text editing.
-		</p>
-		<p>
-			Rich is built with extension in mind, you can create your own icons that will execute specific commands in <a href="https://developer.mozilla.org/en-US/docs/Web/API/document.execCommand">document.execCommand</a>. If you find any bugs or have any issues please report them on <a href="https://github.com/christopherrolfe198/rich/issues">github</a>.
-		</p>
-		<div class="rich"></div>
-		<p>
-			N.B. Currently this project offers no support for IE other than what it natively supports.
-		</p>
+		<div class="row">
+			<div class="col-m-12">
+				<h1>
+					Rich <small>- The easy to use rich text editor built on content editable</small>
+				</h1>
+				<p>
+					<strong>What is content editable?</strong>
+					Content editable is an attribute that lets you manipulate the text on elements like you would a text area. With the execCommand function you are opened to a wide range of native support for rich text editing.
+				</p>
+				<p>
+					Rich is built with extension in mind, you can create your own icons that will execute specific commands in <a href="https://developer.mozilla.org/en-US/docs/Web/API/document.execCommand">document.execCommand</a>. If you find any bugs or have any issues please report them on <a href="https://github.com/christopherrolfe198/rich/issues">github</a>.
+				</p>
+				<textarea class="rich"></textarea>
+			</div>
+		</div>
 	</div>
-
-<script src="config.js"></script>
-<script src="dist/main.min.js"></script>
+	<script src="dist/main.js"></script>
+	<script src="example/RichConfig.js"></script>
 </body>
 </html>

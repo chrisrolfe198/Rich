@@ -1,28 +1,27 @@
-.rich-toolbar {
-	width: 100%;
+.rich {
+    display: none;
 }
 
-.rich-toolbar:before,
-.rich-toolbar:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+.rich-toolbar-group {
+    margin: 0 5px;
+    display: inline-block;
 }
-.rich-toolbar:after {
-    clear: both;
+
+.rich-toolbar-group:first-of-type {
+    margin-left: 0;
 }
 
 .rich-toolbar-item {
-	float: left;
-	padding: 0.5% 1%;
-	text-transform: capitalize;
-	background-color: #ccc;
-	margin: 0 0.25%;
-	margin-bottom: 0.5%;
-	border-radius: 3px;
+    margin-right: 1px;
+}
+
+.btn-group .rich-toolbar-item {
+    margin: 0;
 }
 
 .rich-textarea {
-	border: 1px solid #ccc;
-	margin: 0 0.25%;
-	min-height: 200px;
+    margin-top: 5px;
+    outline: none;
+    border: solid #ccc 1px;
+    padding: 2px;
 }
