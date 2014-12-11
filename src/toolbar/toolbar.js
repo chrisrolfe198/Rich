@@ -88,7 +88,7 @@ toolbar.prototype.handleToolbarItemClick = function(e) {
     var name = e.currentTarget.getAttribute('data-item-name');
 
     if (e.currentTarget.getAttribute('data-input') == "true") {
-        window.Rich.editor.input.show("Please enter a value for "+name);
+        window.Rich.editor.input.show("Please enter a value for "+Rich.toolbar.items[name].text);
         var value = window.Rich.editor.input.get();
         Rich.toolbar.items[name].callback(value);
     } else {
